@@ -1,0 +1,76 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" Source your .vimrc
+source ~/.vimrc
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+" Search case insensitive
+set ignorecase
+" Use case sensitive search when at least one char is uppercase
+set smartcase
+" Highlight search results
+set hlsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" highlight copied text
+plug 'machakann/vim-highlightedyank'
+set highlightedyank
+
+" commentary plugin
+plug 'tpope/vim-commentary'
+" multiple cursors
+plug 'terryma/vim-multiple-cursors'
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'dbakker/vim-paragraph-motion'
+set quickscope
+set ideajoin
+
+" Which key plugin
+set which-key
+" disable the timeout option
+set notimeout
+" increase the timeoutlen (default: 1000), don't add space around the equal sign
+set timeoutlen=5000
+let g:WhichKey_ShowVimActions = "true"
+
+"" -- map ide actions to ideavim -- https://jb.gg/abva4t
+map <leader><leader> <Action>(GotoFile)
+map <leader>rd <Action>(DebugClass)
+map <leader>rb <Action>(ToggleLineBreakpoint)
+map gd <Action>(GotoDeclaration)
+map <cr> <Action>(ExpandCollapseToggleAction)
+map <leader>o <Action>(OptimizeImports)
+map <leader>rr <Action>(RunClass)
+map <leader>s <Action>(StepOver)
+map gt <Action>(GotoTest)
+map == <Action>(ReformatCode)
+map gcc <Action>(CommentByLineComment)
+" Window splits
+map <leader>wv <Action>(SplitVertically)
+map <leader>ws <Action>(SplitHorizontally)
+map <leader>wu <Action>(Unsplit)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+
+"" insert mode abbrieviations
+inoreabbrev <buffer> mapp .map {  }<Left><Left>
