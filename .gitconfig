@@ -1,0 +1,24 @@
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    line-numbers = true
+    side-by-side = true
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[user]
+	email = maik.schwan@leanix.net
+	name = Maik Schwan
+[init]
+	templatedir = ~/.git_template
+[push]
+	autoSetupRemote = true
+
+[includeIf "gitdir:~/dev-private/"]
+	email = maik.schwan@gmail.com
+
