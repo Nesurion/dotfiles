@@ -49,12 +49,12 @@ config.keys = {
 		action = act.CloseCurrentPane({ confirm = false }),
 	},
 	{
-		key = "v",
+		key = "h",
 		mods = "ALT|SUPER",
 		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		key = "h",
+		key = "v",
 		mods = "ALT|SUPER",
 		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
