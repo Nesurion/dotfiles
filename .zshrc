@@ -201,3 +201,6 @@ source <(fzf --zsh)
 # fzf git
 source ~/fzf-git.sh/fzf-git.sh
 alias dotfiles='/usr/bin/git --git-dir=/Users/I529035/.dotfiles/ --work-tree=/Users/I529035'
+
+# neovim
+alias n="nvim"

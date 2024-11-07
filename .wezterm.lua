@@ -11,7 +11,7 @@ local config = wezterm.config_builder()
 config.color_scheme = "Tokyo Night"
 
 -- Font configuration
-config.font = wezterm.font("Hasklug Nerd Font")
+config.font = wezterm.font("Lilex Nerd Font")
 config.font_size = 15.0
 
 -- Window configuration
