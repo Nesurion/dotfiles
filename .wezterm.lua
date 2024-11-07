@@ -20,6 +20,8 @@ config.window_decorations = "RESIZE"
 
 config.audible_bell = "Disabled"
 
+config.scrollback_lines = 5000
+
 -- Keybindings
 config.keys = {
 	-- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
@@ -40,6 +42,46 @@ config.keys = {
 		key = "f",
 		mods = "SUPER",
 		action = act.Search({ CaseInSensitiveString = "" }),
+	},
+	{
+		key = "w",
+		mods = "SUPER",
+		action = act.CloseCurrentPane({ confirm = false }),
+	},
+	{
+		key = "v",
+		mods = "ALT|SUPER",
+		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "h",
+		mods = "ALT|SUPER",
+		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "LeftArrow",
+		mods = "ALT|SUPER",
+		action = act.ActivatePaneDirection("Left"),
+	},
+	{
+		key = "DownArrow",
+		mods = "ALT|SUPER",
+		action = act.ActivatePaneDirection("Down"),
+	},
+	{
+		key = "UpArrow",
+		mods = "ALT|SUPER",
+		action = act.ActivatePaneDirection("Up"),
+	},
+	{
+		key = "RightArrow",
+		mods = "ALT|SUPER",
+		action = act.ActivatePaneDirection("Right"),
+	},
+	{
+		key = "Enter",
+		mods = "ALT|SUPER",
+		action = act.TogglePaneZoomState,
 	},
 }
 
