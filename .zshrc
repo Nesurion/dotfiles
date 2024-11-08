@@ -200,7 +200,7 @@ export PATH="/opt/homebrew/opt/ansible@8/bin:$PATH"
 source <(fzf --zsh)
 # fzf git
 source ~/fzf-git.sh/fzf-git.sh
-alias dotfiles='/usr/bin/git --git-dir=/Users/I529035/.dotfiles/ --work-tree=/Users/I529035'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # neovim
 alias n="nvim"
