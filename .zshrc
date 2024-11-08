@@ -204,3 +204,10 @@ alias dotfiles='/usr/bin/git --git-dir=/Users/I529035/.dotfiles/ --work-tree=/Us
 
 # neovim
 alias n="nvim"
+
+# azure cli - change tenant
+alias azsap="az login --tenant 69b863e3-480a-4ee9-8bd0-20a8adb6909b"
+alias azlx="az login --tenant 52ef8f7b-e339-4923-8e6a-fa9ee3304195"
+
+# lazygit
+alias lg="lazygit"
