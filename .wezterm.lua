@@ -10,6 +10,11 @@ local config = wezterm.config_builder()
 -- For example, changing the color scheme:
 config.color_scheme = "Tokyo Night"
 
+config.inactive_pane_hsb = {
+	saturation = 0.6,
+	brightness = 0.5,
+}
+
 -- Font configuration
 config.font = wezterm.font("Lilex Nerd Font")
 config.font_size = 15.0
