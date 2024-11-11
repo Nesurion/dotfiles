@@ -47,7 +47,7 @@ hs.hotkey.bind(hyper, "S", function()
 	win:moveToScreen(targetScreen)
 end)
 
--- full screen
+-- full screen with padding
 local maximize_window = function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
@@ -123,7 +123,7 @@ hs.hotkey.bind(hyper, "l", function()
 
 	f.x = half
 	f.y = max.y
-	f.w = max.w
+	f.w = half
 	f.h = max.h
 	win:setFrame(f)
 end)
