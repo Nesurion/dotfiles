@@ -16,7 +16,7 @@ config.inactive_pane_hsb = {
 }
 
 -- Font configuration
-config.font = wezterm.font("Lilex Nerd Font")
+config.font = wezterm.font("GeistMono Nerd Font")
 config.font_size = 15.0
 
 -- Window configuration
