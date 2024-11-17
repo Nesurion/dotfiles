@@ -13,13 +13,11 @@ set ideajoin
 
 """ -- map ide actions to ideavim -- https://jb.gg/abva4t
 "map <leader><leader> <Action>(GotoFile)
-"map <leader>rd <Action>(DebugClass)
-"map <leader>rb <Action>(ToggleLineBreakpoint)
 " map gd <Action>(GotoDeclaration)
 map <cr> <Action>(ExpandCollapseToggleAction)
 "map <leader>o <Action>(OptimizeImports)
-map <leader>tt <Action>(RunClass)
-"map <leader>s <Action>(StepOver)
+" map <leader>tt <Action>(RunClass)
+nmap <leader>r <Action>(RenameElement)
 map gt <Action>(GotoTest)
 map == <Action>(ReformatCode)
 "map gcc <Action>(CommentByLineComment)
