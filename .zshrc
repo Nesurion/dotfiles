@@ -166,7 +166,7 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config /Users/I529035/oh-my-posh.toml)"
+  eval "$(oh-my-posh init zsh --config /Users/I529035/.oh-my-posh.toml)"
 fi
 
 # nvm 
