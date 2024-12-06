@@ -117,24 +117,38 @@ source $ZSH/oh-my-zsh.sh
 
 alias reload="source ~/.zshrc"
 # git
+join_with_hypen() {
+  local IFS="-"
+  echo "$*"
+}
+
 alias glgo="git log --pretty=oneline --abbrev-commit"
 alias gdc="git diff --cached"
+
 gcob () {
-	git checkout -b feature/$1-$2
+  local branch_title=$(join_with_hypen $@)
+	git checkout -b feature/$branch_title
 }
+
 gcoa () {
-	git checkout -b feature/ATLAS-$1-$2
+  local branch_title=$(join_with_hypen $@)
+	git checkout -b feature/ATLAS-$branch_title
 }
+
 gri () {
 	git rebase -i HEAD~$1
 }
+
 alias ghpr="gh pr create"
 alias ghprd="gh pr create -d"
+
 # docker
 alias dps="docker ps"
+
 # bat
 export BAT_THEME="Nord"
 alias cat="bat -pp"
+
 # jenv
 eval "$(jenv init -)"
 
