@@ -151,7 +151,7 @@ nmap <leader>bD <Action>(CloseActiveTab)
 " Close other buffers
 nmap <leader>bP <Action>(CloseAllEditorsButActive)
 " Escape and Clear hlsearch
-" nmap <esc> :nohlsearch<CR>
+nmap <esc> :nohlsearch<CR>
 nmap <leader>ur :nohlsearch<CR>
 " Save File
 inoremap <C-s> <C-o>:w<CR>
@@ -283,19 +283,21 @@ nmap gD <Action>(GotoDeclaration)
 " Signature Help
 nmap gK <Action>(ParameterInfo)
 " Signature Help in Insert Mode
-imap <C-k> <C-o><Action>(ParameterInfo)
+imap <C-k> <C-o><Action>(ParameterInfo)i
 " Code Action
 nmap <leader>ca <Action>(RefactoringMenu)
 vmap <leader>ca <Action>(RefactoringMenu)
 " Run Codelens
-nmap <leader>cc :echo 'There is no equivalent mapping for Run Codelens.'<cr>
-vmap <leader>cc :echo 'There is no equivalent mapping for Run Codelens.'<cr>
+" nmap <leader>cc :echo 'There is no equivalent mapping for Run Codelens.'<cr>
+" vmap <leader>cc :echo 'There is no equivalent mapping for Run Codelens.'<cr>
 " Refresh & Display Codelens
-nmap <leader>cC :echo 'There is no equivalent mapping for Refresh & Display Codelens.'<cr>
+" nmap <leader>cC :echo 'There is no equivalent mapping for Refresh & Display Codelens.'<cr>
 " Rename File
 nmap <leader>cR <Action>(RenameFile)
 " Rename
 nmap <leader>cr <Action>(RenameElement)
+" Build Project
+nmap <leader>cb <Action>(CompileDirty)
 " Source Action
 nmap <leader>cA <Action>(ShowIntentionActions)
 " Next Reference
@@ -409,7 +411,7 @@ nmap <leader>uC <Action>(QuickChangeScheme)
 " Run with Args
 " nmap <leader>da <Action>(ChooseRunConfiguration)
 " " Toggle Breakpoint
-nmap <leader>db <Action>(ToggleBreakpointAction)
+nmap <leader>db <Action>(ToggleLineBreakpoint)
 " " Breakpoint Condition
 nmap <leader>dB <Action>(ToggleBreakpointAction)
 " " Continue
@@ -475,6 +477,8 @@ nmap <leader>to :echo 'Not yet implemented.'<cr>
 nmap <leader>tO :echo 'Not yet implemented.'<cr>
 " Run Nearest
 nmap <leader>tr <Action>(RunTestGroup)
+" Rerun Last
+nmap <leader>tR <Action>(Rerun)
 " Toggle Summary
 nmap <leader>ts <Action>(ShowTestSummary)
 " Stop

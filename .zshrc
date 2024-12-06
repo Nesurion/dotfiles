@@ -213,3 +213,6 @@ alias azlx="az login --tenant 52ef8f7b-e339-4923-8e6a-fa9ee3304195"
 
 # lazygit
 alias lg="lazygit"
+
+# zoom
+alias zoom="open -a zoom.us 'https://leanix.zoom.us/j/93512421375'"

@@ -11,11 +11,27 @@ set ideajoin
 
 " let g:WhichKey_ShowVimActions = "true"
 
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
+" <A-n> is used to enter accented text e.g. ñ
+" Feel free to pick your own mappings that are not affected. I like to use <leader>
+nmap <leader><C-n> <Plug>AllWholeOccurrences
+xmap <leader><C-n> <Plug>AllWholeOccurrences
+nmap <leader>g<C-n> <Plug>AllOccurrences
+xmap <leader>g<C-n> <Plug>AllOccurrences
+
 """ -- map ide actions to ideavim -- https://jb.gg/abva4t
 "map <leader><leader> <Action>(GotoFile)
 " map gd <Action>(GotoDeclaration)
 map <cr> <Action>(ExpandCollapseToggleAction)
-"map <leader>o <Action>(OptimizeImports)
+map <leader>co <Action>(OptimizeImports)
 " map <leader>tt <Action>(RunClass)
 nmap <leader>r <Action>(RenameElement)
 map gt <Action>(GotoTest)

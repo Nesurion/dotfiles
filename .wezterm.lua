@@ -16,7 +16,7 @@ config.inactive_pane_hsb = {
 }
 
 -- Font configuration
-config.font = wezterm.font("FiraCode Nerd Font")
+config.font = wezterm.font_with_fallback({ "Berkeley Mono", "FiraCode Nerd Font" })
 config.font_size = 15.0
 
 -- Window configuration
@@ -26,6 +26,8 @@ config.window_decorations = "RESIZE"
 config.audible_bell = "Disabled"
 
 config.scrollback_lines = 5000
+
+config.window_close_confirmation = "NeverPrompt"
 
 -- Keybindings
 config.keys = {
