@@ -121,7 +121,7 @@ hs.hotkey.bind(hyper, "l", function()
 	local max = screen:frame()
 	local half = max.w / 2
 
-	f.x = half
+	f.x = max.x / 2
 	f.y = max.y
 	f.w = half
 	f.h = max.h
