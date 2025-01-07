@@ -141,12 +141,13 @@ gri () {
 
 alias ghpr="gh pr create"
 alias ghprd="gh pr create -d"
+alias ghd="gh dash"
 
 # docker
 alias dps="docker ps"
 
 # bat
-export BAT_THEME="Nord"
+export BAT_THEME="tokyonight_night"
 alias cat="bat -pp"
 
 # jenv
