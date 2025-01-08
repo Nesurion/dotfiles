@@ -1,41 +1,130 @@
-" .ideavimrc is a configuration file for IdeaVim plugin. It uses
-"   the same commands as the original .vimrc configuration.
-" You can find a list of commands here: https://jb.gg/h38q75
-" Find more examples here: https://jb.gg/share-ideavimrc
-
-" Source your .vimrc
+"source ~/.idea-lazy.vim
 source ~/.vimrc
-source ~/.idea-lazy.vim
 
+" set ideajoin
 set ideajoin
 
-" let g:WhichKey_ShowVimActions = "true"
+" sort which key hints none case sensitive (otherwise capital letters are first)
+let g:WhichKey_SortCaseSensitive = "false"
 
-" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
-nmap <C-n> <Plug>NextWholeOccurrence
-xmap <C-n> <Plug>NextWholeOccurrence
-nmap g<C-n> <Plug>NextOccurrence
-xmap g<C-n> <Plug>NextOccurrence
-xmap <C-x> <Plug>SkipOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
+""" IdeaVim Keymap
+"" Move lines
+" Move Down
+nmap <A-j> <Action>(MoveLineDown)
+" Move Up
+nmap <A-k> <Action>(MoveLineUp)
 
-" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
-" <A-n> is used to enter accented text e.g. ñ
-" Feel free to pick your own mappings that are not affected. I like to use <leader>
-nmap <leader><C-n> <Plug>AllWholeOccurrences
-xmap <leader><C-n> <Plug>AllWholeOccurrences
-nmap <leader>g<C-n> <Plug>AllOccurrences
-xmap <leader>g<C-n> <Plug>AllOccurrences
+"" Buffer navigation
+let g:WhichKeyDesc_buffer = "<leader>b +buffer"
+" Prev Buffer
+nmap <S-h> <Action>(PreviousTab)
+" Next Buffer
+nmap <S-l> <Action>(NextTab)
+" Delete Buffer
+let g:WhichKeyDesc_buffer_close = "<leader>bd Close Buffer"
+nmap <leader>bd <Action>(CloseContent)
+" Close other buffers
+let g:WhichKeyDesc_buffer_close_other = "<leader>bP Close Other Buffers"
+nmap <leader>bP <Action>(CloseAllEditorsButActive)
+
+"" Error navigation
+" Next Error
+nmap ]] <Action>(GotoNextError)
+" Prev Error
+nmap [[ <Action>(GotoPreviousError)
+
+"" GitHub <leader>gh
+let g:WhichKeyDesc_git = "<leader>gh +github"
+" Git Blame Line
+let g:WhichKeyDesc_git_blame = "<leader>ghb git blame"
+nmap <leader>ghb <Action>(Annotate)
+
+"" Goto
+let g:WhichKeyDesc_goto = "g +goto"
+" Goto Definition
+let g:WhichKeyDesc_goto_declaration = "gd Goto Declaration"
+nmap gd <Action>(GotoDeclaration)
+" References
+let g:WhichKeyDesc_goto_usage = "gu Find Usage"
+nmap gu <Action>(FindUsages)
+" Goto Implementation
+let g:WhichKeyDesc_goto_implementation = "gi Goto Implementation"
+nmap gi <Action>(GotoImplementation)
+" Goto Type Definition
+let g:WhichKeyDesc_goto_type_definition = "gy Goto Type Definition"
+nmap gy <Action>(GotoTypeDeclaration)
+" Signature Help in Insert Mode
+imap <C-k> <C-o><Action>(ParameterInfo)i
+" Goto Test
+let g:WhichKeyDesc_goto_test = "gt Goto Test"
+map gt <Action>(GotoTest)
+
+"" Code <leader>c
+let g:WhichKeyDesc_code = "<leader>c +code"
+" Rename File
+let g:WhichKeyDesc_code_rename_file = "<leader>cR Rename File"
+nmap <leader>cR <Action>(RenameFile)
+" Rename
+let g:WhichKeyDesc_code_rename = "<leader>cr Rename"
+nmap <leader>cr <Action>(RenameElement)
+" Build Project
+let g:WhichKeyDesc_code_build = "<leader>cb Build"
+nmap <leader>cb <Action>(CompileDirty)
+" Source Action
+let g:WhichKeyDesc_code_action = "<leader>cA Action"
+nmap <leader>cA <Action>(ShowIntentionActions)
+" Optimize Imports
+let g:WhichKeyDesc_code_optimize_imports = "<leader>co Optimize Imports"
+map <leader>co <Action>(OptimizeImports)
+" Collapse
+let g:WhichKeyDesc_collapse = "<cr> Collapse"
+map <cr> <Action>(ExpandCollapseToggleAction)
+let g:WhichKeyDesc_code_format = "== Code Format"
+map == <Action>(ReformatCode)
+
+"" Project View
+" Focus Project View
+let g:WhichKeyDesc_explorer_focus = "<leader>e Project View"
+nmap <leader>e <Action>(ActivateProjectToolWindow)
+" Select in Project View
+let g:WhichKeyDesc_explorer_select = "<leader>E Select in Project View"
+nmap <leader>E <Action>(SelectInProjectView)
+
+"" Code Navigation
+" Find Files (Root Dir)
+let g:WhichKeyDesc_find_file = "<leader><space> Select in Project View"
+nmap <leader><space> <Action>(GotoFile)
+" Switch Buffer
+let g:WhichKeyDesc_switcher_focus = "<leader>, Switch"
+nmap <leader>, <Action>(Switcher)
+" Grep (Root Dir)
+nmap <leader>/ <Action>(FindInPath)
+" Command History
+nmap <leader>: <Action>(ShowCommands)
+
+"" Debug
+" " Toggle Breakpoint
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+
+"" Tests
+" Run Nearest
+nmap <leader>tr <Action>(RunTestGroup)
+" Run File
+nmap <leader>tt <Action>(RunClass)
+" Run All Test Files
+nmap <leader>tT <Action>(RunAllTests)
+" Rerun Last
+nmap <leader>tR <Action>(Rerun)
+" Toggle Summary
+nmap <leader>ts <Action>(ShowTestSummary)
+" Stop
+nmap <leader>tS <Action>(Stop)
+
 
 """ -- map ide actions to ideavim -- https://jb.gg/abva4t
 "map <leader><leader> <Action>(GotoFile)
 " map gd <Action>(GotoDeclaration)
-map <cr> <Action>(ExpandCollapseToggleAction)
-map <leader>co <Action>(OptimizeImports)
 " map <leader>tt <Action>(RunClass)
-nmap <leader>r <Action>(RenameElement)
-map gt <Action>(GotoTest)
-map == <Action>(ReformatCode)
 "map gcc <Action>(CommentByLineComment)
 "" Window splits
 "map <leader>wv <Action>(SplitVertically)
