@@ -11,6 +11,9 @@
 [delta "interactive"]
     keep-plus-minus-markers = false
 
+[alias]
+  prune-branches = !git branch --merged origin/master | grep -vw master | xargs git branch -d
+
 [user]
 	email = maik.schwan@leanix.net
 	name = Maik Schwan
