@@ -111,8 +111,6 @@ nmap <leader>db <Action>(ToggleLineBreakpoint)
 nmap <leader>tr <Action>(RunTestGroup)
 " Run File
 nmap <leader>tt <Action>(RunClass)
-" Run All Test Files
-nmap <leader>tT <Action>(RunAllTests)
 " Rerun Last
 nmap <leader>tR <Action>(Rerun)
 " Toggle Summary
