@@ -33,11 +33,17 @@ nmap ]] <Action>(GotoNextError)
 " Prev Error
 nmap [[ <Action>(GotoPreviousError)
 
+" Signature Help in Insert Mode
+imap <C-k> <C-o><Action>(ParameterInfo)i
+nmap <C-k> <Action>(ParameterInfo)
+
 "" GitHub <leader>gh
 let g:WhichKeyDesc_git = "<leader>gh +github"
 " Git Blame Line
 let g:WhichKeyDesc_git_blame = "<leader>ghb git blame"
 nmap <leader>ghb <Action>(Annotate)
+let g:WhichKeyDesc_git_pr = "<leader>ghp Pull Requests"
+nmap <leader>ghp <Action>(ActivatePullRequestsToolWindow)
 
 "" Goto
 let g:WhichKeyDesc_goto = "g +goto"
@@ -53,11 +59,15 @@ nmap gi <Action>(GotoImplementation)
 " Goto Type Definition
 let g:WhichKeyDesc_goto_type_definition = "gy Goto Type Definition"
 nmap gy <Action>(GotoTypeDeclaration)
-" Signature Help in Insert Mode
-imap <C-k> <C-o><Action>(ParameterInfo)i
 " Goto Test
 let g:WhichKeyDesc_goto_test = "gt Goto Test"
 map gt <Action>(GotoTest)
+" Goto Class
+let g:WhichKeyDesc_goto_class = "gC Goto Class"
+map gC ?class <CR>:nohlsearch<CR>w
+" Goto Function
+let g:WhichKeyDesc_goto_function = "gf Goto Function"
+map gf ?fun <CR>:nohlsearch<CR>w
 
 "" Code <leader>c
 let g:WhichKeyDesc_code = "<leader>c +code"
@@ -107,16 +117,31 @@ nmap <leader>: <Action>(ShowCommands)
 nmap <leader>db <Action>(ToggleLineBreakpoint)
 
 "" Tests
-" Run Nearest
-nmap <leader>tr <Action>(RunTestGroup)
+let g:WhichKeyDesc_tests = "<leader>t +tests"
 " Run File
+let g:WhichKeyDesc_tests_run = "<leader>tt Run Test"
 nmap <leader>tt <Action>(RunClass)
 " Rerun Last
-nmap <leader>tR <Action>(Rerun)
-" Toggle Summary
-nmap <leader>ts <Action>(ShowTestSummary)
+let g:WhichKeyDesc_tests_rerun = "<leader>tr Rerun Last"
+nmap <leader>tr <Action>(Rerun)
+" Debug
+let g:WhichKeyDesc_tests_debug = "<leader>td Debug Test"
+nmap <leader>td <Action>(ContextDebug)
 " Stop
+let g:WhichKeyDesc_tests_stop = "<leader>tS Stop"
 nmap <leader>tS <Action>(Stop)
+
+"" Window
+let g:WhichKeyDesc_window = "<leader>w +window"
+" Debug
+let g:WhichKeyDesc_window_debug = "<leader>wd Debug"
+nmap <leader>wd <Action>(ActivateDebugToolWindow)
+" Build
+let g:WhichKeyDesc_window_build = "<leader>wb Build"
+nmap <leader>wb <Action>(ActivateBuildToolWindow)
+" Run
+let g:WhichKeyDesc_window_run = "<leader>wr Run"
+nmap <leader>wr <Action>(ActivateRunToolWindow)
 
 
 """ -- map ide actions to ideavim -- https://jb.gg/abva4t
