@@ -84,6 +84,23 @@ end
 
 hs.hotkey.bind(hyper, "m", maximize_window)
 hs.hotkey.bind(hyper, "f", maximize_window_full)
+hs.hotkey.bind(hyper, "w", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+
+	local padding = 240
+
+	win:setFrame(max)
+
+	-- add some padding on the left for stage manager
+	f.x = max.x + padding
+	f.y = max.y + padding
+	f.w = max.w - (padding * 2)
+	f.h = max.h - (padding * 2)
+	win:setFrame(f)
+end)
 
 -- 1/2 left
 hs.hotkey.bind(hyper, "h", function()
@@ -121,7 +138,7 @@ hs.hotkey.bind(hyper, "l", function()
 	local max = screen:frame()
 	local half = max.w / 2
 
-	f.x = max.x / 2
+	f.x = max.x + half
 	f.y = max.y
 	f.w = half
 	f.h = max.h
