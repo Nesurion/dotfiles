@@ -145,6 +145,7 @@ alias ghd="gh dash"
 
 # docker
 alias dps="docker ps"
+alias docker-socket="sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock"
 
 # bat
 export BAT_THEME="tokyonight_night"
@@ -227,7 +228,11 @@ alias azsap="az login --tenant 69b863e3-480a-4ee9-8bd0-20a8adb6909b"
 alias azlx="az login --tenant 52ef8f7b-e339-4923-8e6a-fa9ee3304195"
 
 # lazygit
+export XDG_CONFIG_HOME="$HOME/.config"
 alias lg="lazygit"
 
 # zoom
 alias zoom="open -a zoom.us 'https://leanix.zoom.us/j/93512421375'"
+
+# eza
+alias ls="eza"

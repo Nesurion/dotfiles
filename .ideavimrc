@@ -3,6 +3,8 @@ source ~/.vimrc
 
 " set ideajoin
 set ideajoin
+" https://plugins.jetbrains.com/plugin/25897-vim-functiontextobj
+set functiontextobj
 
 " sort which key hints none case sensitive (otherwise capital letters are first)
 let g:WhichKey_SortCaseSensitive = "false"
@@ -24,8 +26,15 @@ nmap <S-l> <Action>(NextTab)
 let g:WhichKeyDesc_buffer_close = "<leader>bd Close Buffer"
 nmap <leader>bd <Action>(CloseContent)
 " Close other buffers
-let g:WhichKeyDesc_buffer_close_other = "<leader>bP Close Other Buffers"
-nmap <leader>bP <Action>(CloseAllEditorsButActive)
+let g:WhichKeyDesc_buffer_close_other = "<leader>bo Close Other Buffers"
+nmap <leader>bo <Action>(CloseAllEditorsButActive)
+" Move tab to next group
+let g:WhichKeyDesc_tab_next_group = "<leader>bg Move tab to next group"
+nmap <leader>bg <Action>(MoveEditorToOppositeTabGroup)
+" Move focus to next tab group
+let g:WhichKeyDesc_tab_next_group = "<leader>bn Move focus to next tab group"
+nmap <leader>bn <Action>(NextSplitter)
+
 
 "" Error navigation
 " Next Error
@@ -127,6 +136,9 @@ nmap <leader>tr <Action>(Rerun)
 " Debug
 let g:WhichKeyDesc_tests_debug = "<leader>td Debug Test"
 nmap <leader>td <Action>(ContextDebug)
+" Evaluate Expression
+let g:WhichKeyDesc_tests_eval_expression = "<leader>te Evaluate Expression"
+nmap <leader>te <Action>(EvaluateExpression)
 " Stop
 let g:WhichKeyDesc_tests_stop = "<leader>tS Stop"
 nmap <leader>tS <Action>(Stop)

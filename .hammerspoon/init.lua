@@ -94,7 +94,6 @@ hs.hotkey.bind(hyper, "w", function()
 
 	win:setFrame(max)
 
-	-- add some padding on the left for stage manager
 	f.x = max.x + padding
 	f.y = max.y + padding
 	f.w = max.w - (padding * 2)
@@ -160,18 +159,33 @@ hs.hotkey.bind(hyper, "k", function()
 	win:setFrame(f)
 end)
 
--- top third
+-- top half
 hs.hotkey.bind(hyper, "t", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
 	local max = screen:frame()
-	local a_third = max.h / 3
+	local half = max.h / 2
 
 	f.x = max.x
 	f.y = max.y
 	f.w = max.w
-	f.h = a_third
+	f.h = half
+	win:setFrame(f)
+end)
+
+-- top 40%
+hs.hotkey.bind(hyper, "o", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+	local fourtypercent = max.h * 0.4
+
+	f.x = max.x
+	f.y = max.y
+	f.w = max.w
+	f.h = fourtypercent
 	win:setFrame(f)
 end)
 
@@ -181,12 +195,28 @@ hs.hotkey.bind(hyper, "b", function()
 	local f = win:frame()
 	local screen = win:screen()
 	local max = screen:frame()
-	local a_third = max.h / 3
+	local half = max.h / 2
 
 	f.x = max.x
-	f.y = max.y + a_third
+	f.y = max.y + half
 	f.w = max.w
-	f.h = a_third * 2
+	f.h = half
+	win:setFrame(f)
+end)
+
+-- bottom 60%
+hs.hotkey.bind(hyper, "u", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+
+	local sixtypercent = max.h * 0.6
+	local fourtypercent = max.h * 0.4
+	f.x = max.x
+	f.y = max.y + fourtypercent
+	f.w = max.w
+	f.h = sixtypercent
 	win:setFrame(f)
 end)
 
