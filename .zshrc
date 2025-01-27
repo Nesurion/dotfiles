@@ -115,6 +115,8 @@ source $ZSH/oh-my-zsh.sh
 
 # [[ user section ]]
 
+export EDITOR='nvim'
+
 alias reload="source ~/.zshrc"
 # git
 join_with_hypen() {
