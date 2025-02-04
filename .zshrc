@@ -151,7 +151,10 @@ alias docker-socket="sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.so
 
 # bat
 export BAT_THEME="tokyonight_night"
-alias cat="bat -pp"
+
+if hash bat 2>/dev/null; then
+  alias cat="bat -pp"
+fi
 
 # jenv
 eval "$(jenv init -)"
@@ -237,4 +240,14 @@ alias lg="lazygit"
 alias zoom="open -a zoom.us 'https://leanix.zoom.us/j/93512421375'"
 
 # eza
-alias ls="eza"
+if hash eza 2>/dev/null; then
+  alias ls="eza --icons"
+  alias ll="eza -l --icons"
+  alias la="eza -la --icons"
+  alias l="eza -l -h --icons"
+  alias lr="eza -l --icons --sort-modified"
+  alias tree="eza -T"
+fi
+
+# magic fix for watch to support aliases
+alias watch="watch "
