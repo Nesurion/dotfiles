@@ -7,6 +7,15 @@ set which-key
 set notimeout
 " increase the timeoutlen (default: 1000), don't add space around the equal sign
 
+" Multiple cursors
+set multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+nmap <leader><C-n> <Plug>AllWholeOccurrences
+xmap <leader><C-n> <Plug>AllWholeOccurrences
+
 " set ideajoin
 set ideajoin
 " https://plugins.jetbrains.com/plugin/25897-vim-functiontextobj
@@ -179,4 +188,3 @@ nmap <leader>wr <Action>(ActivateRunToolWindow)
 "map <leader>ws <Action>(SplitHorizontally)
 "map <leader>wu <Action>(Unsplit)
 "map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
-
