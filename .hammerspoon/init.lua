@@ -54,7 +54,7 @@ local maximize_window = function()
 	local screen = win:screen()
 	local max = screen:frame()
 
-	local padding = 20
+	local padding = 40
 
 	win:setFrame(max)
 
@@ -232,3 +232,5 @@ bindAppToKey("B", "Arc") -- browser
 bindAppToKey("T", "WezTerm") -- terminal
 bindAppToKey("S", "Slack")
 bindAppToKey("E", "IntelliJ IDEA") -- editor
+bindAppToKey("W", "WhatsApp")
+bindAppToKey("O", "Microsoft Outlook")
