@@ -170,7 +170,7 @@ config.keys = {
 	},
 	-- Prompt for a name to use for a new workspace and switch to it.
 	{
-		key = "w",
+		key = "t",
 		mods = "CTRL|ALT",
 		action = act.PromptInputLine({
 			description = wezterm.format({
@@ -194,7 +194,7 @@ config.keys = {
 		}),
 	},
 	{
-		key = "w",
+		key = "t",
 		mods = "ALT",
 		action = workspace_switcher.switch_workspace(),
 	},
