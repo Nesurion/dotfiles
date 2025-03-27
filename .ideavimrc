@@ -11,10 +11,14 @@ set notimeout
 set multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
 xmap <C-n> <Plug>NextWholeOccurrence
-xmap <C-x> <Plug>SkipOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
+"xmap <C-x> <Plug>SkipOccurrence
+"xmap <C-p> <Plug>RemoveOccurrence
 nmap <leader><C-n> <Plug>AllWholeOccurrences
 xmap <leader><C-n> <Plug>AllWholeOccurrences
+nmap <C-j> <Action>(EditorCloneCaretBelow)
+nmap <C-k> <Action>(EditorCloneCaretAbove)
+xmap <C-j> <Action>(EditorCloneCaretBelow)
+xmap <C-k> <Action>(EditorCloneCaretAbove)
 
 " set ideajoin
 set ideajoin
@@ -31,6 +35,9 @@ map T <Plug>Sneak_T
 " sort which key hints none case sensitive (otherwise capital letters are first)
 let g:WhichKey_SortCaseSensitive = "false"
 
+let g:WhichKey_split_horizontal = "<leader>- Split horizontal"
+let g:WhichKey_split_vertical = "<leader><Bslash> Split vertical"
+
 """ IdeaVim Keymap
 "" Move lines
 " Move Down
@@ -38,20 +45,30 @@ nmap <A-j> <Action>(MoveLineDown)
 " Move Up
 nmap <A-k> <Action>(MoveLineUp)
 
+"" Camel case movement
+map E ]w
+map B [b
+
 "" Buffer navigation
 let g:WhichKeyDesc_buffer = "<leader>b +buffer"
 " Prev Buffer
 nmap <S-h> <Action>(PreviousTab)
 " Next Buffer
 nmap <S-l> <Action>(NextTab)
+" Split Buffer vertical
+let g:WhichKeyDesc_buffer_split = "<leader>bs Split Buffer"
+nmap <leader>bs :vsplit<CR>
 " Delete Buffer
 let g:WhichKeyDesc_buffer_close = "<leader>bd Close Buffer"
 nmap <leader>bd <Action>(CloseContent)
+" Delete Buffer
+let g:WhichKeyDesc_buffer_close_other = "<C-w> Close Buffer"
+nmap <C-w> <Action>(CloseContent)
 " Close other buffers
 let g:WhichKeyDesc_buffer_close_other = "<leader>bo Close Other Buffers"
 nmap <leader>bo <Action>(CloseAllEditorsButActive)
 " Move tab to next group
-let g:WhichKeyDesc_tab_next_group = "<leader>bg Move tab to next group"
+let g:WhichKeyDesc_tab_move_to_next_group = "<leader>bg Move tab to next group"
 nmap <leader>bg <Action>(MoveEditorToOppositeTabGroup)
 " Move focus to next tab group
 let g:WhichKeyDesc_tab_next_group = "<leader>bn Move focus to next tab group"
@@ -144,7 +161,9 @@ nmap <leader>/ <Action>(FindInPath)
 nmap <leader>: <Action>(ShowCommands)
 
 "" Debug
+let g:WhichKeyDesc_debug = "<leader>d +debug"
 " " Toggle Breakpoint
+let g:WhichKeyDesc_debug_breakpoint = "<leader>db Toggle Breakpoint"
 nmap <leader>db <Action>(ToggleLineBreakpoint)
 
 "" Tests
@@ -176,7 +195,36 @@ nmap <leader>wb <Action>(ActivateBuildToolWindow)
 " Run
 let g:WhichKeyDesc_window_run = "<leader>wr Run"
 nmap <leader>wr <Action>(ActivateRunToolWindow)
+" GitHub Copilot Chat
+let g:WhichKeyDesc_window_gh_copilot_chat = "<leader>wc Copilot Chat"
+nmap <leader>wc <Action>(ActivateGitHubCopilotChatToolWindow)
+" Pull Requests
+let g:WhichKeyDesc_window_pr = "<leader>wp Pull Requests"
+nmap <leader>wp <Action>(ActivatePullRequestsToolWindow)
 
+"" Invert word under cursor
+function! Invert()
+  let antonyms = ['true', 'false',
+                 \'True', 'False',
+                 \'==', '!=',]
+
+  normal "wyiw
+  let wordUnderCaret = @w
+
+  let eraseWord = 'ciw'
+  let count = 0
+  while (count < len(antonyms))
+    if (antonyms[count] ==# wordUnderCaret)
+      let antonym = (count % 2 ==? 0) ? antonyms[count + 1] : antonyms[count - 1]
+      execute 'normal ' .. eraseWord .. antonym
+      break
+    endif
+    let count += 1
+  endwhile
+endfunction
+
+let g:WhichKeyDesc_invert_word = "<leader>i Invert word"
+nnoremap <leader>i :call Invert()<CR>i<ESC>
 
 """ -- map ide actions to ideavim -- https://jb.gg/abva4t
 "map <leader><leader> <Action>(GotoFile)

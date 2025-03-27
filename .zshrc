@@ -144,6 +144,7 @@ gri () {
 alias ghpr="gh pr create"
 alias ghprd="gh pr create -d"
 alias ghd="gh dash"
+alias gcl="git fetch -p && git branch -vv | grep ': gone]' | grep -vE '^\s*(master|main)\s' | awk '{print \$1}' | xargs git branch -d"
 
 # docker
 alias dps="docker ps"
@@ -251,3 +252,12 @@ fi
 
 # magic fix for watch to support aliases
 alias watch="watch "
+
+# zoxide
+eval "$(zoxide init zsh)"
+if hash zoxide 2>/dev/null; then
+  alias cd="z"
+fi
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

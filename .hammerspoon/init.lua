@@ -234,3 +234,4 @@ bindAppToKey("S", "Slack")
 bindAppToKey("E", "IntelliJ IDEA") -- editor
 bindAppToKey("W", "WhatsApp")
 bindAppToKey("O", "Microsoft Outlook")
+bindAppToKey("M", "Spotify")

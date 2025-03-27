@@ -9,3 +9,5 @@ vim.keymap.set("n", "c", '"_c', { noremap = true })
 vim.keymap.set("n", "C", '"_C', { noremap = true })
 
 vim.keymap.set("n", "<leader>yy", "0wv$hy", { noremap = true })
+
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })

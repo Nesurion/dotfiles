@@ -81,6 +81,18 @@ config.scrollback_lines = 5000
 
 config.window_close_confirmation = "NeverPrompt"
 
+-- Worksapce Switcher
+workspace_switcher.workspace_formatter = function(label)
+	return wezterm.format({
+		{ Attribute = { Italic = false } },
+		{ Foreground = { AnsiColor = "Fuchsia" } },
+		-- { Background = { Color = "black" } },
+		{ Text = "󱂬: " .. label },
+	})
+end
+workspace_switcher.zoxide_path = "/opt/homebrew/bin/zoxide"
+workspace_switcher.switch_workspace({ extra_args = " | rg -Fxf ~/dev" })
+
 -- Keybindings
 config.keys = {
 	-- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
@@ -97,10 +109,18 @@ config.keys = {
 		mods = "OPT",
 		action = act.SendKey({ key = "f", mods = "ALT" }),
 	},
+	-- Search with CMD-f
 	{
 		key = "f",
 		mods = "SUPER",
 		action = act.Search({ CaseInSensitiveString = "" }),
+	},
+	-- Copy mode
+	-- Quick select mode is CTRL|SHIFT <space>
+	{
+		key = "Tab",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivateCopyMode,
 	},
 	{
 		key = "w",
@@ -117,32 +137,6 @@ config.keys = {
 		mods = "ALT|SUPER",
 		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
-	-- {
-	-- 	key = "LeftArrow",
-	-- 	mods = "ALT|SUPER",
-	-- 	action = act.ActivatePaneDirection("Left"),
-	-- },
-	-- {
-	-- 	key = "DownArrow",
-	-- 	mods = "ALT|SUPER",
-	-- 	action = act.ActivatePaneDirection("Down"),
-	-- },
-	-- {
-	-- 	key = "UpArrow",
-	-- 	mods = "ALT|SUPER",
-	-- 	action = act.ActivatePaneDirection("Up"),
-	-- },
-	-- {
-	-- 	key = "RightArrow",
-	-- 	mods = "ALT|SUPER",
-	-- 	action = act.ActivatePaneDirection("Right"),
-	-- },
-	-- {
-	-- 	key = "Enter",
-	-- 	mods = "ALT|SUPER",
-	-- 	action = act.TogglePaneZoomState,
-	-- },
-	-- Vim style pane navigation
 	{
 		key = "h",
 		mods = "ALT",
