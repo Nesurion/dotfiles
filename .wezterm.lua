@@ -93,6 +93,11 @@ end
 workspace_switcher.zoxide_path = "/opt/homebrew/bin/zoxide"
 workspace_switcher.switch_workspace({ extra_args = " | rg -Fxf ~/dev" })
 
+local function is_neovim(pane)
+	local process_name = pane:get_foreground_process_name()
+	return process_name and (process_name:match("nvim") or process_name:match("n"))
+end
+
 -- Keybindings
 config.keys = {
 	-- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
@@ -125,7 +130,15 @@ config.keys = {
 	{
 		key = "w",
 		mods = "SUPER",
-		action = act.CloseCurrentPane({ confirm = false }),
+		-- action = act.CloseCurrentPane({ confirm = false }),
+		action = wezterm.action_callback(function(window, pane, line)
+			-- window:perform_action(act.CloseCurrentPane({ confirm = true }), pane)
+			if is_neovim(pane) then
+				window:perform_action(act.CloseCurrentPane({ confirm = true }), pane)
+			else
+				window:perform_action(act.CloseCurrentPane({ confirm = false }), pane)
+			end
+		end),
 	},
 	{
 		key = "h",

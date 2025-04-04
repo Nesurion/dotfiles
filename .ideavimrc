@@ -7,6 +7,10 @@ set which-key
 set notimeout
 " increase the timeoutlen (default: 1000), don't add space around the equal sign
 
+set easymotion
+" set mini around inside
+set mini-ai
+
 " Multiple cursors
 set multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
@@ -61,8 +65,6 @@ nmap <leader>bs :vsplit<CR>
 " Delete Buffer
 let g:WhichKeyDesc_buffer_close = "<leader>bd Close Buffer"
 nmap <leader>bd <Action>(CloseContent)
-" Delete Buffer
-let g:WhichKeyDesc_buffer_close_other = "<C-w> Close Buffer"
 nmap <C-w> <Action>(CloseContent)
 " Close other buffers
 let g:WhichKeyDesc_buffer_close_other = "<leader>bo Close Other Buffers"

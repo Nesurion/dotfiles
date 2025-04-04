@@ -11,3 +11,6 @@ vim.keymap.set("n", "C", '"_C', { noremap = true })
 vim.keymap.set("n", "<leader>yy", "0wv$hy", { noremap = true })
 
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
+
+-- Map Enter to toggle code folding
+vim.api.nvim_set_keymap("n", "<CR>", "za", { noremap = true, silent = true })
