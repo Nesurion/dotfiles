@@ -14,3 +14,5 @@ vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree foc
 
 -- Map Enter to toggle code folding
 vim.api.nvim_set_keymap("n", "<CR>", "za", { noremap = true, silent = true })
+-- Close the buffer with ctrl-w
+vim.api.nvim_set_keymap("n", "<C-w>", ":bd<CR>", { noremap = true, silent = true })
