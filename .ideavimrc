@@ -139,6 +139,11 @@ map <leader>co <Action>(OptimizeImports)
 " Collapse
 let g:WhichKeyDesc_collapse = "<cr> Collapse"
 map <cr> <Action>(ExpandCollapseToggleAction)
+let g:WhichKeyDesc_collapse_all = "zM Collapse all"
+map zM <Action>(CollapseAllRegions)
+let g:WhichKeyDesc_expand_all = "zR Expand all"
+map zR <Action>(ExpandAllRegions)
+
 let g:WhichKeyDesc_code_format = "== Code Format"
 map == <Action>(ReformatCode)
 

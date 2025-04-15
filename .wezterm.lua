@@ -114,12 +114,14 @@ config.keys = {
 		mods = "OPT",
 		action = act.SendKey({ key = "f", mods = "ALT" }),
 	},
+
 	-- Search with CMD-f
 	{
 		key = "f",
 		mods = "SUPER",
 		action = act.Search({ CaseInSensitiveString = "" }),
 	},
+
 	-- Copy mode
 	-- Quick select mode is CTRL|SHIFT <space>
 	{
@@ -131,8 +133,7 @@ config.keys = {
 		key = "w",
 		mods = "SUPER",
 		-- action = act.CloseCurrentPane({ confirm = false }),
-		action = wezterm.action_callback(function(window, pane, line)
-			-- window:perform_action(act.CloseCurrentPane({ confirm = true }), pane)
+		action = wezterm.action_callback(function(window, pane, _)
 			if is_neovim(pane) then
 				window:perform_action(act.CloseCurrentPane({ confirm = true }), pane)
 			else
@@ -140,6 +141,8 @@ config.keys = {
 			end
 		end),
 	},
+
+	-- Split
 	{
 		key = "h",
 		mods = "ALT|SUPER",
@@ -150,6 +153,8 @@ config.keys = {
 		mods = "ALT|SUPER",
 		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
+
+	-- move pane focus
 	{
 		key = "h",
 		mods = "ALT",
@@ -170,6 +175,30 @@ config.keys = {
 		mods = "ALT",
 		action = act.ActivatePaneDirection("Right"),
 	},
+
+	-- pane size
+	{
+		key = "h",
+		mods = "SHIFT|CMD",
+		action = act.AdjustPaneSize({ "Left", 5 }),
+	},
+	{
+		key = "j",
+		mods = "SHIFT|CMD",
+		action = act.AdjustPaneSize({ "Down", 5 }),
+	},
+	{
+		key = "k",
+		mods = "SHIFT|CMD",
+		action = act.AdjustPaneSize({ "Up", 5 }),
+	},
+	{
+		key = "l",
+		mods = "SHIFT|CMD",
+		action = act.AdjustPaneSize({ "Right", 5 }),
+	},
+
+	-- Zoom
 	{
 		key = "Enter",
 		mods = "ALT",

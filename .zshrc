@@ -144,7 +144,7 @@ gri () {
 alias ghpr="gh pr create"
 alias ghprd="gh pr create -d"
 alias ghd="gh dash"
-alias gcl="git fetch -p && git branch -vv | grep ': gone]' | grep -vE '^\s*(master|main)\s' | awk '{print \$1}' | xargs git branch -d"
+alias gcl="gh clean-branches"
 
 # docker
 alias dps="docker ps"

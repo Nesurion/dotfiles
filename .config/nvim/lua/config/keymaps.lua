@@ -10,9 +10,20 @@ vim.keymap.set("n", "C", '"_C', { noremap = true })
 
 vim.keymap.set("n", "<leader>yy", "0wv$hy", { noremap = true })
 
+-- Replace word under cursor with register content
+vim.keymap.set("n", "<leader>p", 'viw"_dP', { noremap = true })
+
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
 
 -- Map Enter to toggle code folding
 vim.api.nvim_set_keymap("n", "<CR>", "za", { noremap = true, silent = true })
+
 -- Close the buffer with ctrl-w
-vim.api.nvim_set_keymap("n", "<C-w>", ":bd<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-w>", function()
+  Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
+
+-- Format
+vim.keymap.set({ "n", "v" }, "==", function()
+  LazyVim.format({ force = true })
+end, { desc = "Format" })

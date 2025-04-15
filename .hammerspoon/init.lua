@@ -54,7 +54,7 @@ local maximize_window = function()
 	local screen = win:screen()
 	local max = screen:frame()
 
-	local padding = 40
+	local padding = 50
 
 	win:setFrame(max)
 
