@@ -55,7 +55,7 @@ workspace_switcher.apply_to_config(config)
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "Tokyo Night Moon"
 
 config.inactive_pane_hsb = {
 	saturation = 0.6,
@@ -64,7 +64,7 @@ config.inactive_pane_hsb = {
 
 -- Font configuration
 config.font = wezterm.font_with_fallback({ "Berkeley Mono", "FiraCode Nerd Font" })
-config.font_size = 15.0
+config.font_size = 16.0
 
 -- Window configuration
 -- config.enable_tab_bar = true
@@ -129,6 +129,8 @@ config.keys = {
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.ActivateCopyMode,
 	},
+
+	-- Close current pane requires confirmation for nvim
 	{
 		key = "w",
 		mods = "SUPER",
@@ -203,6 +205,16 @@ config.keys = {
 		key = "Enter",
 		mods = "ALT",
 		action = act.TogglePaneZoomState,
+	},
+	{
+		key = "+",
+		mods = "CMD",
+		action = act.IncreaseFontSize,
+	},
+	{
+		key = "-",
+		mods = "CMD",
+		action = act.DecreaseFontSize,
 	},
 	-- Prompt for a name to use for a new workspace and switch to it.
 	{

@@ -83,7 +83,8 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git iterm2 kubectl)
+plugins=()
+# plugins=(git kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -242,6 +243,7 @@ alias zoom="open -a zoom.us 'https://leanix.zoom.us/j/93512421375'"
 
 # eza
 if hash eza 2>/dev/null; then
+  export EZA_CONFIG_DIR="~/.config/eza/"
   alias ls="eza --icons"
   alias ll="eza -l --icons"
   alias la="eza -la --icons"
