@@ -178,9 +178,12 @@ let g:WhichKeyDesc_tests = "<leader>t +tests"
 " Run File
 let g:WhichKeyDesc_tests_run = "<leader>tt Run Test"
 nmap <leader>tt <Action>(RunClass)
+" Run Nearest
+let g:WhichKeyDesc_tests_run_nearest = "<leader>tr Run Nearest Test"
+nmap <leader>tr :action RunContextTest<CR>
 " Rerun Last
-let g:WhichKeyDesc_tests_rerun = "<leader>tr Rerun Last"
-nmap <leader>tr <Action>(Rerun)
+let g:WhichKeyDesc_tests_rerun = "<leader>tl Rerun Last"
+nmap <leader>tl <Action>(Rerun)
 " Debug
 let g:WhichKeyDesc_tests_debug = "<leader>td Debug Test"
 nmap <leader>td <Action>(ContextDebug)
