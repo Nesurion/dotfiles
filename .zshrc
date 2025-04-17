@@ -5,12 +5,6 @@
 #  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 #fi
 
-# export TYPEWRITTEN_PROMPT_LAYOUT="half_pure"
-# export TYPEWRITTEN_RELATIVE_PATH="adaptive"
-# export TYPEWRITTEN_RIGHT_PROMPT_PREFIX_FUNCTION=typewritten_right_prefix
-# export TYPEWRITTEN_LEFT_PROMPT_PREFIX_FUNCTION=(pwd)
-# export TYPEWRITTEN_COLOR_MAPPINGS="primary:#81A1C1;secondary:#A3BE8C;accent:#8FBCBB;info_negative:#BF616A;info_positive:#A3BE8C;info_neutral_1:#EBCB8B;info_neutral_2:#B48EAD;info_special:#D08770"
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -160,18 +154,6 @@ fi
 
 # jenv
 eval "$(jenv init -)"
-
-# typewritten theme customization
-typewritten_right_prefix() {
-  current_kube_context="$(kubectx -c 2> /dev/null)"
-  tw_kube_region=$(echo $current_kube_context | awk -F'-' '{print $2}')
-  tw_kube_env=$(echo $current_kube_context | awk -F'-' '{print $3}')
-  tw_kube_namespace="$(kubens -c 2> /dev/null)"
-
-  if [[ $current_kube_context != "" ]]; then
-    echo "󱃾 $(basename $tw_kube_region)-$(basename $tw_kube_env)/$(basename $tw_kube_namespace)"
-  fi
-}
 
 # kubectl
 kssec () {
