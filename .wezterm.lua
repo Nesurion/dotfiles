@@ -219,7 +219,7 @@ config.keys = {
 	-- Prompt for a name to use for a new workspace and switch to it.
 	{
 		key = "t",
-		mods = "CTRL|ALT",
+		mods = "CTRL|ALT|SHIFT",
 		action = act.PromptInputLine({
 			description = wezterm.format({
 				{ Attribute = { Intensity = "Bold" } },
@@ -240,6 +240,11 @@ config.keys = {
 				end
 			end),
 		}),
+	},
+	{
+		key = "t",
+		mods = "CTRL|ALT",
+		action = workspace_switcher.switch_to_prev_workspace(),
 	},
 	{
 		key = "t",

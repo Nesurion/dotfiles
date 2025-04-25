@@ -90,8 +90,8 @@ nmap <C-k> <Action>(ParameterInfo)
 "" GitHub <leader>gh
 let g:WhichKeyDesc_git = "<leader>gh +github"
 " Git Blame Line
-let g:WhichKeyDesc_git_blame = "<leader>ghb git blame"
-nmap <leader>ghb <Action>(Annotate)
+let g:WhichKeyDesc_git_blame = "<leader>gb git blame"
+nmap <leader>gb <Action>(Annotate)
 let g:WhichKeyDesc_git_pr = "<leader>ghp Pull Requests"
 nmap <leader>ghp <Action>(ActivatePullRequestsToolWindow)
 

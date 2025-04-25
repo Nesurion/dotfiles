@@ -9,13 +9,13 @@
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME=""
+# ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -77,10 +77,10 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=()
+# plugins=()
 # plugins=(git kubectl)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -112,56 +112,11 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='nvim'
 
-alias reload="source ~/.zshrc"
-# git
-join_with_hypen() {
-  local IFS="-"
-  echo "$*"
-}
-
-alias glgo="git log --pretty=oneline --abbrev-commit"
-alias gdc="git diff --cached"
-
-gcob () {
-  local branch_title=$(join_with_hypen $@)
-	git checkout -b feature/$branch_title
-}
-
-gcoa () {
-  local branch_title=$(join_with_hypen $@)
-	git checkout -b feature/ATLAS-$branch_title
-}
-
-gri () {
-	git rebase -i HEAD~$1
-}
-
-alias ghpr="gh pr create"
-alias ghprd="gh pr create -d"
-alias ghd="gh dash"
-alias gcl="gh clean-branches"
-
-# docker
-alias dps="docker ps"
-alias docker-socket="sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock"
-
 # bat
 export BAT_THEME="tokyonight_night"
 
-if hash bat 2>/dev/null; then
-  alias cat="bat -pp"
-fi
-
 # jenv
 eval "$(jenv init -)"
-
-# kubectl
-kssec () {
-	kubectl get secret $1 -o json | jq '.data | map_values(@base64d)'
-}
-alias kgpw="watch 'kubectl get pods'"
-
-# eval "$(starship init zsh)"
 
 # goland
 export GOPATH=$HOME/golang
@@ -206,45 +161,10 @@ source <(fzf --zsh)
 # fzf git
 source ~/.fzf-git.sh
 
-# dotfiles alias to manage dotfiles via git
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-# neovim
-alias n="nvim"
-
-# azure cli - change tenant
-alias azsap="az login --tenant 69b863e3-480a-4ee9-8bd0-20a8adb6909b"
-alias azlx="az login --tenant 52ef8f7b-e339-4923-8e6a-fa9ee3304195"
-
 # lazygit
 export XDG_CONFIG_HOME="$HOME/.config"
-alias lg="lazygit"
-
-# zoom
-alias zoom="open -a zoom.us 'https://leanix.zoom.us/j/93512421375'"
-
-# eza
-if hash eza 2>/dev/null; then
-  export EZA_CONFIG_DIR="~/.config/eza/"
-  alias ls="eza --icons"
-  alias ll="eza -l --icons"
-  alias la="eza -la --icons"
-  alias l="eza -l -h --icons"
-  alias lr="eza -l --icons --sort-modified"
-  alias tree="eza -T"
-fi
-
-# magic fix for watch to support aliases
-alias watch="watch "
-
-# zoxide
-eval "$(zoxide init zsh)"
-if hash zoxide 2>/dev/null; then
-  alias cd="z"
-fi
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+# source <(ng completion script)
 
-# kubectx
-alias kcx="kubectx"
+source ~/.zshaliases

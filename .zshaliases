@@ -1,0 +1,107 @@
+alias reload="source ~/.zshrc"
+
+# git
+alias glgo="git log --pretty=oneline --abbrev-commit"
+alias gdc="git diff --cached"
+alias gst="git status"
+alias gp="git push"
+alias gl="git pull"
+
+join_with_hypen() {
+  local IFS="-"
+  echo "$*"
+}
+
+gcob () {
+  local branch_title=$(join_with_hypen $@)
+	git checkout -b feature/$branch_title
+}
+
+gcoa () {
+  local branch_title=$(join_with_hypen $@)
+	git checkout -b feature/ATLAS-$branch_title
+}
+
+gri () {
+	git rebase -i HEAD~$1
+}
+
+alias ghpr="gh pr create"
+alias ghprd="gh pr create -d"
+alias ghd="gh dash"
+alias gcl="gh clean-branches"
+alias gco="git checkout"
+alias gl="git pull"
+alias gp="git push"
+
+# bat
+if hash bat 2>/dev/null; then
+  alias cat="bat -pp"
+fi
+
+# docker
+alias dps="docker ps"
+alias docker-socket="sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.sock"
+
+# kubectl
+# pods
+alias k="kubectl"
+alias kgp="kubectl get pods"
+alias kdp="kubectl describe pods"
+alias kgpw="watch 'kubectl get pods'"
+# logs
+alias klf="kubectl logs -f"
+# services
+alias kgs="kubectl get service"
+alias kds="kubectl describe service"
+# namespace
+alias kgns="kubectl get namespaces"
+alias kcn="kubectl config set-context --current --namespace"
+# configMap
+alias kgcm="kubectl get configmaps"
+alias kdcm="kubectl describe configmaps"
+# secret
+alias kgsec="kubectl get secret"
+alias kdsec="kubectl describe secret"
+kssec () {
+	kubectl get secret $1 -o json | jq '.data | map_values(@base64d)'
+}
+
+# dotfiles alias to manage dotfiles via git
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# neovim
+alias n="nvim"
+
+# azure cli - change tenant
+alias azsap="az login --tenant 69b863e3-480a-4ee9-8bd0-20a8adb6909b"
+alias azlx="az login --tenant 52ef8f7b-e339-4923-8e6a-fa9ee3304195"
+
+# lazygit
+alias lg="lazygit"
+
+# zoom
+alias zoom="open -a zoom.us 'https://leanix.zoom.us/j/93512421375'"
+
+# eza
+if hash eza 2>/dev/null; then
+  export EZA_CONFIG_DIR="~/.config/eza/"
+  alias ls="eza --icons"
+  alias ll="eza -l --icons"
+  alias la="eza -la --icons"
+  alias l="eza -l -h --icons"
+  alias lr="eza -l --icons --sort-modified"
+  alias tree="eza -T"
+fi
+
+# magic fix for watch to support aliases
+alias watch="watch "
+
+# zoxide
+eval "$(zoxide init zsh)"
+if hash zoxide 2>/dev/null; then
+  alias cd="z"
+fi
+
+# kubectx
+alias kcx="kubectx"

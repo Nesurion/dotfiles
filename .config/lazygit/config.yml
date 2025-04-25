@@ -1,3 +1,5 @@
+os:
+  shellFunctionsFile: ~/.zshaliases
 gui:
   shortTimeFormat: 03:04
   nerdFontsVersion: "3"
@@ -92,7 +94,7 @@ customCommands:
 
         Write your 5 commit messages below in the format shown in Output Template section above." \
           | fzf --height 40% --border --ansi --preview "echo {}" --preview-window=up:wrap \
-          | xargs -I {} bash -c '
+          | xargs -S 1024 -I {} bash -c '
               COMMIT_MSG_FILE=$(mktemp)
               echo "{}" > "$COMMIT_MSG_FILE"
               ${EDITOR:-vim} "$COMMIT_MSG_FILE"
