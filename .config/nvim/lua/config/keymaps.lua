@@ -13,13 +13,13 @@ vim.keymap.set("n", "<leader>yy", "0wv$hy", { noremap = true })
 -- Replace word under cursor with register content
 vim.keymap.set("n", "<leader>p", 'viw"_dP', { noremap = true })
 
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
+-- vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
 
 -- Map Enter to toggle code folding
 vim.api.nvim_set_keymap("n", "<CR>", "za", { noremap = true, silent = true })
 
--- Close the buffer with ctrl-w
-vim.keymap.set("n", "<C-w>", function()
+-- Close the buffer with ctrl-d
+vim.keymap.set("n", "<C-d>", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
 

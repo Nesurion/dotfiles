@@ -6,6 +6,12 @@ alias gdc="git diff --cached"
 alias gst="git status"
 alias gp="git push"
 alias gl="git pull"
+alias gd="git diff"
+alias gco="git checkout"
+alias ghpr="gh pr create"
+alias ghprd="gh pr create -d"
+alias ghd="gh dash"
+alias gcl="gh clean-branches"
 
 join_with_hypen() {
   local IFS="-"
@@ -25,14 +31,6 @@ gcoa () {
 gri () {
 	git rebase -i HEAD~$1
 }
-
-alias ghpr="gh pr create"
-alias ghprd="gh pr create -d"
-alias ghd="gh dash"
-alias gcl="gh clean-branches"
-alias gco="git checkout"
-alias gl="git pull"
-alias gp="git push"
 
 # bat
 if hash bat 2>/dev/null; then

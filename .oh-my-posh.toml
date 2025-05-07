@@ -83,3 +83,17 @@ final_space = true
 
     [blocks.segments.properties]
       cache_duration = 'none'
+
+[[tooltips]]
+type = "npm"
+tips = [ "npm", "node", "nvm" ]
+style = "plain"
+foreground = "#e0af68"
+template = " {{ .Full }} "
+
+[[tooltips]]
+type = "node"
+tips = [ "node", "npm", "nvm"]
+style = "plain"
+foreground = "#e0af68"
+template = " {{ .Full }} "

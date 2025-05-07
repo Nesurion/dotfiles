@@ -63,7 +63,7 @@ config.inactive_pane_hsb = {
 }
 
 -- Font configuration
-config.font = wezterm.font_with_fallback({ "Berkeley Mono", "FiraCode Nerd Font" })
+config.font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "FiraCode Nerd Font" })
 config.font_size = 16.0
 
 -- Window configuration
@@ -77,7 +77,7 @@ config.window_decorations = "RESIZE"
 
 config.audible_bell = "Disabled"
 
-config.scrollback_lines = 5000
+config.scrollback_lines = 10000
 
 config.window_close_confirmation = "NeverPrompt"
 
@@ -87,7 +87,7 @@ workspace_switcher.workspace_formatter = function(label)
 		{ Attribute = { Italic = false } },
 		{ Foreground = { AnsiColor = "Fuchsia" } },
 		-- { Background = { Color = "black" } },
-		{ Text = "󱂬: " .. label },
+		{ Text = "󱂬 " .. label },
 	})
 end
 workspace_switcher.zoxide_path = "/opt/homebrew/bin/zoxide"
@@ -155,6 +155,10 @@ config.keys = {
 		mods = "ALT|SUPER",
 		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
+
+	-- Scroll
+	{ key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-0.5) },
+	{ key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(0.5) },
 
 	-- move pane focus
 	{

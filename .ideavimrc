@@ -65,7 +65,7 @@ nmap <leader>bs :vsplit<CR>
 " Delete Buffer
 let g:WhichKeyDesc_buffer_close = "<leader>bd Close Buffer"
 nmap <leader>bd <Action>(CloseContent)
-nmap <C-w> <Action>(CloseContent)
+nmap <C-d> <Action>(CloseContent)
 " Close other buffers
 let g:WhichKeyDesc_buffer_close_other = "<leader>bo Close Other Buffers"
 nmap <leader>bo <Action>(CloseAllEditorsButActive)
@@ -211,6 +211,12 @@ nmap <leader>wc <Action>(ActivateGitHubCopilotChatToolWindow)
 " Pull Requests
 let g:WhichKeyDesc_window_pr = "<leader>wp Pull Requests"
 nmap <leader>wp <Action>(ActivatePullRequestsToolWindow)
+" SplitHorizontally
+let g:WhichKeyDesc_window_split_horizontal = "<leader>wh Split Horizontal"
+nmap <leader>wh <Action>(SplitHorizontally)
+" SplitVertically
+let g:WhichKeyDesc_window_split_vertical = "<leader>wv Split Vertical"
+nmap <leader>wv <Action>(SplitVertically)
 
 "" Invert word under cursor
 function! Invert()
