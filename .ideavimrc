@@ -11,6 +11,9 @@ set easymotion
 " set mini around inside
 set mini-ai
 
+" relative line numbers
+set relativenumber
+
 " Multiple cursors
 set multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
@@ -53,6 +56,9 @@ nmap <A-k> <Action>(MoveLineUp)
 map E ]w
 map B [b
 
+nmap <leader>o o<ESC>
+nmap <leader>O O<ESC>
+
 "" Buffer navigation
 let g:WhichKeyDesc_buffer = "<leader>b +buffer"
 " Prev Buffer
@@ -65,7 +71,7 @@ nmap <leader>bs :vsplit<CR>
 " Delete Buffer
 let g:WhichKeyDesc_buffer_close = "<leader>bd Close Buffer"
 nmap <leader>bd <Action>(CloseContent)
-nmap <C-d> <Action>(CloseContent)
+nmap <A-d> <Action>(CloseContent)
 " Close other buffers
 let g:WhichKeyDesc_buffer_close_other = "<leader>bo Close Other Buffers"
 nmap <leader>bo <Action>(CloseAllEditorsButActive)
@@ -87,13 +93,16 @@ nmap [[ <Action>(GotoPreviousError)
 imap <C-k> <C-o><Action>(ParameterInfo)i
 nmap <C-k> <Action>(ParameterInfo)
 
-"" GitHub <leader>gh
-let g:WhichKeyDesc_git = "<leader>gh +github"
+"" GitHub <leader>g
+let g:WhichKeyDesc_git = "<leader>g +github"
 " Git Blame Line
 let g:WhichKeyDesc_git_blame = "<leader>gb git blame"
 nmap <leader>gb <Action>(Annotate)
-let g:WhichKeyDesc_git_pr = "<leader>ghp Pull Requests"
-nmap <leader>ghp <Action>(ActivatePullRequestsToolWindow)
+let g:WhichKeyDesc_git_pr = "<leader>gp +pr"
+let g:WhichKeyDesc_git_pr_toggle = "<leader>gpt Toggle PR Review"
+nmap <leader>gpt <Action>(Github.Pull.Request.Review.In.Editor.Toggle)
+let g:WhichKeyDesc_git_pr_comment = "<leader>gpc Comment"
+nmap <leader>gpc <Action>(Code.Review.Editor.New.Comment)
 
 "" Goto
 let g:WhichKeyDesc_goto = "g +goto"
@@ -159,11 +168,13 @@ nmap <leader>E <Action>(SelectInProjectView)
 " Find Files (Root Dir)
 let g:WhichKeyDesc_find_file = "<leader><space> Select in Project View"
 nmap <leader><space> <Action>(GotoFile)
+"nmap <Leader><space> <action>(com.mituuz.fuzzier.Fuzzier)
 " Switch Buffer
 let g:WhichKeyDesc_switcher_focus = "<leader>, Switch"
 nmap <leader>, <Action>(Switcher)
 " Grep (Root Dir)
 nmap <leader>/ <Action>(FindInPath)
+"nmap <leader>/ <Action>(com.mituuz.fuzzier.FuzzyGrepCaseInsensitive) 
 " Command History
 nmap <leader>: <Action>(ShowCommands)
 
@@ -172,6 +183,9 @@ let g:WhichKeyDesc_debug = "<leader>d +debug"
 " " Toggle Breakpoint
 let g:WhichKeyDesc_debug_breakpoint = "<leader>db Toggle Breakpoint"
 nmap <leader>db <Action>(ToggleLineBreakpoint)
+" Resume
+let g:WhichKeyDesc_debug_resume = "<leader>dr Resume"
+nmap <leader>dr <Action>(Resume)
 
 "" Tests
 let g:WhichKeyDesc_tests = "<leader>t +tests"
@@ -241,6 +255,8 @@ endfunction
 
 let g:WhichKeyDesc_invert_word = "<leader>i Invert word"
 nnoremap <leader>i :call Invert()<CR>i<ESC>
+
+"noremap <leader>dc diwxf)x
 
 """ -- map ide actions to ideavim -- https://jb.gg/abva4t
 "map <leader><leader> <Action>(GotoFile)

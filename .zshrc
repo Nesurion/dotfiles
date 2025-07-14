@@ -1,3 +1,12 @@
+# oh-my-zsh
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+plugins=(gitfast zoxide history-substring-search docker kubectl azure fzf)
+
+source $ZSH/oh-my-zsh.sh
+
+# Set neovim as the default editor
 export EDITOR='nvim'
 
 # complete command based on history
@@ -63,4 +72,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # source <(ng completion script)
 
 source ~/.zshaliases
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+
+# google Gemini
+export GOOGLE_API_KEY="REPLACE_WITH_YOUR_GOOGLE_API_KEY"
+export AZURE_OPENAI_KEY="REPLACE_WITH_YOUR_AZURE_KEY"
+

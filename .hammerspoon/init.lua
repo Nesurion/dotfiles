@@ -235,3 +235,21 @@ bindAppToKey("E", "IntelliJ IDEA") -- editor
 bindAppToKey("W", "WhatsApp")
 bindAppToKey("O", "Microsoft Outlook")
 bindAppToKey("M", "Spotify")
+
+-- Toggle Teams Mute
+local toggleMute = function()
+	local teams = hs.application.find("com.microsoft.teams2")
+	if not (teams == null) then
+		hs.eventtap.keyStroke({ "cmd", "shift" }, "m", 0, teams)
+	end
+end
+hs.hotkey.bind({}, "f12", toggleMute)
+
+-- Toggle Teams Camera
+local toggleCamera = function()
+	local teams = hs.application.find("com.microsoft.teams2")
+	if not (teams == null) then
+		hs.eventtap.keyStroke({ "cmd", "shift" }, "o", 0, teams)
+	end
+end
+hs.hotkey.bind({}, "f11", toggleCamera)

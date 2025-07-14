@@ -130,10 +130,23 @@ config.keys = {
 		action = wezterm.action.ActivateCopyMode,
 	},
 
-	-- Close current pane requires confirmation for nvim
+	-- Close current pane cmd-w (with confirmation for nvim)
 	{
 		key = "w",
 		mods = "SUPER",
+		-- action = act.CloseCurrentPane({ confirm = false }),
+		action = wezterm.action_callback(function(window, pane, _)
+			if is_neovim(pane) then
+				window:perform_action(act.CloseCurrentPane({ confirm = true }), pane)
+			else
+				window:perform_action(act.CloseCurrentPane({ confirm = false }), pane)
+			end
+		end),
+	},
+	-- Close current pane alt-d (with confirmation for nvim)
+	{
+		key = "d",
+		mods = "ALT",
 		-- action = act.CloseCurrentPane({ confirm = false }),
 		action = wezterm.action_callback(function(window, pane, _)
 			if is_neovim(pane) then
@@ -157,8 +170,20 @@ config.keys = {
 	},
 
 	-- Scroll
-	{ key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-0.5) },
-	{ key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(0.5) },
+	-- Up
+	{ key = "PageUp", action = act.ScrollByPage(-0.25) },
+	{
+		key = "u",
+		mods = "CTRL",
+		action = act.ScrollByPage(-0.25),
+	},
+	-- Down
+	{ key = "PageDown", action = act.ScrollByPage(0.25) },
+	{
+		key = "d",
+		mods = "CTRL",
+		action = act.ScrollByPage(0.25),
+	},
 
 	-- move pane focus
 	{
@@ -220,6 +245,7 @@ config.keys = {
 		mods = "CMD",
 		action = act.DecreaseFontSize,
 	},
+
 	-- Prompt for a name to use for a new workspace and switch to it.
 	{
 		key = "t",
