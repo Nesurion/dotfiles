@@ -74,6 +74,9 @@ nmap <leader>o o<ESC>
 let g:WhichKeyDesc_o = "<leader>O Insert new line (above)"
 nmap <leader>O O<ESC>
 
+nmap <leader>o o<ESC>
+nmap <leader>O O<ESC>
+
 "" Buffer navigation
 let g:WhichKeyDesc_buffer = "<leader>b +buffer"
 " Prev Buffer
@@ -318,6 +321,8 @@ endfunction
 
 let g:WhichKeyDesc_invert_word = "<leader>i Invert word"
 nnoremap <leader>i :call Invert()<CR>
+
+"noremap <leader>dc diwxf)x
 
 "noremap <leader>dc diwxf)x
 
