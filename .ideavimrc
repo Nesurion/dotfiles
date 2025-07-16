@@ -145,6 +145,9 @@ nmap <leader>cA <Action>(ShowIntentionActions)
 " Optimize Imports
 let g:WhichKeyDesc_code_optimize_imports = "<leader>co Optimize Imports"
 map <leader>co <Action>(OptimizeImports)
+" Line Diagnostic
+let g:WhichKeyDesc_code_diagnostic = "<leader>cd Line Diagnostics"
+map <leader>cd <Action>(ShowErrorDescription)
 " Collapse
 let g:WhichKeyDesc_collapse = "<cr> Collapse"
 map <cr> <Action>(ExpandCollapseToggleAction)
@@ -186,6 +189,9 @@ nmap <leader>db <Action>(ToggleLineBreakpoint)
 " Resume
 let g:WhichKeyDesc_debug_resume = "<leader>dr Resume"
 nmap <leader>dr <Action>(Resume)
+" Step over
+let g:WhichKeyDesc_debug_step_over = "<leader>ds Step Over"
+nmap <leader>ds <Action>(StepOver)
 
 "" Tests
 let g:WhichKeyDesc_tests = "<leader>t +tests"
@@ -208,6 +214,12 @@ nmap <leader>te <Action>(EvaluateExpression)
 let g:WhichKeyDesc_tests_stop = "<leader>tS Stop"
 nmap <leader>tS <Action>(Stop)
 
+"" AI
+let g:WhichKeyDesc_ai = "<leader>a +ai"
+" GitHub Copilot Chat
+let g:WhichKeyDesc_ai_copilot_chat = "<leader>ac Copilot Chat"
+nmap <leader>ac <Action>(ActivateGitHubCopilotChatToolWindow)
+
 "" Window
 let g:WhichKeyDesc_window = "<leader>w +window"
 " Debug
@@ -219,9 +231,6 @@ nmap <leader>wb <Action>(ActivateBuildToolWindow)
 " Run
 let g:WhichKeyDesc_window_run = "<leader>wr Run"
 nmap <leader>wr <Action>(ActivateRunToolWindow)
-" GitHub Copilot Chat
-let g:WhichKeyDesc_window_gh_copilot_chat = "<leader>wc Copilot Chat"
-nmap <leader>wc <Action>(ActivateGitHubCopilotChatToolWindow)
 " Pull Requests
 let g:WhichKeyDesc_window_pr = "<leader>wp Pull Requests"
 nmap <leader>wp <Action>(ActivatePullRequestsToolWindow)

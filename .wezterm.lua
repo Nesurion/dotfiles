@@ -98,6 +98,11 @@ local function is_neovim(pane)
 	return process_name and (process_name:match("nvim") or process_name:match("n"))
 end
 
+local function is_lazygit(pane)
+	local process_name = pane:get_foreground_process_name()
+	return process_name and (process_name:match("lazygit") or process_name:match("lg"))
+end
+
 -- Keybindings
 config.keys = {
 	-- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
@@ -172,18 +177,18 @@ config.keys = {
 	-- Scroll
 	-- Up
 	{ key = "PageUp", action = act.ScrollByPage(-0.25) },
-	{
-		key = "u",
-		mods = "CTRL",
-		action = act.ScrollByPage(-0.25),
-	},
-	-- Down
+	-- {
+	-- 	key = "u",
+	-- 	mods = "CTRL",
+	-- 	action = act.ScrollByPage(-0.25),
+	-- },
+	-- -- Down
 	{ key = "PageDown", action = act.ScrollByPage(0.25) },
-	{
-		key = "d",
-		mods = "CTRL",
-		action = act.ScrollByPage(0.25),
-	},
+	-- {
+	-- 	key = "d",
+	-- 	mods = "CTRL",
+	-- 	action = act.ScrollByPage(0.25),
+	-- },
 
 	-- move pane focus
 	{

@@ -1,8 +1,8 @@
 os:
   shellFunctionsFile: /Users/I529035/.zshaliases
-git:
-  paging:
-    externalDiffCommand: difft --color=always
+# git:
+#   paging:
+#     externalDiffCommand: difft --color=always
 gui:
   shortTimeFormat: 03:04
   nerdFontsVersion: "3"
@@ -35,18 +35,8 @@ gui:
       - "#c8d3f5"
 
 customCommands:
-  # - key: "n"
-  #   command: 'git commit -m "$(git diff --staged | mods -R commit)"'
-  #   description: "Use mods and AI to create a commit from the currently staged file changes."
-  #   context: files
-  #   output: "log"
   - key: "n"
+    command: 'git commit -m "$(git diff --staged | mods -R commit)"'
     description: "Use mods and AI to create a commit from the currently staged file changes."
-    command: "git commit -m {{.Form.Message | quote}}"
-    context: "files"
+    context: files
     output: "log"
-    prompts:
-      - type: "menuFromCommand"
-        title: "commit message"
-        key: "Message"
-        command: "aicommitmsg"
