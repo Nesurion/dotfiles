@@ -10,7 +10,13 @@ tabline.setup({
 		icons_enabled = true,
 		theme = "Tokyo Night",
 		tabs_enabled = true,
-		theme_overrides = {},
+		theme_overrides = {
+			window_mode = {
+				a = { fg = "#181825", bg = "#cba6f7" },
+				b = { fg = "#cba6f7", bg = "#313244" },
+				c = { fg = "#cdd6f4", bg = "#181825" },
+			},
+		},
 		section_separators = {
 			left = wezterm.nerdfonts.pl_left_hard_divider,
 			right = wezterm.nerdfonts.pl_right_hard_divider,
@@ -104,7 +110,10 @@ local function is_lazygit(pane)
 end
 
 -- Keybindings
+config.leader = { key = " ", mods = "SHIFT", timeout_milliseconds = 1000 }
 config.keys = {
+	-- Enter window_mode
+	{ key = "w", mods = "LEADER", action = act.ActivateKeyTable({ name = "window_mode", one_shot = false }) },
 	-- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
 	{
 		key = "LeftArrow",
@@ -128,11 +137,17 @@ config.keys = {
 	},
 
 	-- Copy mode
-	-- Quick select mode is CTRL|SHIFT <space>
 	{
-		key = "Tab",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.ActivateCopyMode,
+		key = "c",
+		mods = "LEADER",
+		action = act.ActivateCopyMode,
+	},
+
+	-- -- Quick select mode
+	{
+		key = "q",
+		mods = "LEADER",
+		action = act.QuickSelect,
 	},
 
 	-- Close current pane cmd-w (with confirmation for nvim)
@@ -213,26 +228,26 @@ config.keys = {
 	},
 
 	-- pane size
-	{
-		key = "h",
-		mods = "SHIFT|CMD",
-		action = act.AdjustPaneSize({ "Left", 5 }),
-	},
-	{
-		key = "j",
-		mods = "SHIFT|CMD",
-		action = act.AdjustPaneSize({ "Down", 5 }),
-	},
-	{
-		key = "k",
-		mods = "SHIFT|CMD",
-		action = act.AdjustPaneSize({ "Up", 5 }),
-	},
-	{
-		key = "l",
-		mods = "SHIFT|CMD",
-		action = act.AdjustPaneSize({ "Right", 5 }),
-	},
+	-- {
+	-- 	key = "h",
+	-- 	mods = "SHIFT|CMD",
+	-- 	action = act.AdjustPaneSize({ "Left", 5 }),
+	-- },
+	-- {
+	-- 	key = "j",
+	-- 	mods = "SHIFT|CMD",
+	-- 	action = act.AdjustPaneSize({ "Down", 5 }),
+	-- },
+	-- {
+	-- 	key = "k",
+	-- 	mods = "SHIFT|CMD",
+	-- 	action = act.AdjustPaneSize({ "Up", 5 }),
+	-- },
+	-- {
+	-- 	key = "l",
+	-- 	mods = "SHIFT|CMD",
+	-- 	action = act.AdjustPaneSize({ "Right", 5 }),
+	-- },
 
 	-- Zoom
 	{
@@ -288,5 +303,26 @@ config.keys = {
 	},
 }
 
+config.key_tables = {
+	["window_mode"] = {
+		{
+			key = "h",
+			action = act.AdjustPaneSize({ "Left", 5 }),
+		},
+		{
+			key = "j",
+			action = act.AdjustPaneSize({ "Down", 5 }),
+		},
+		{
+			key = "k",
+			action = act.AdjustPaneSize({ "Up", 5 }),
+		},
+		{
+			key = "l",
+			action = act.AdjustPaneSize({ "Right", 5 }),
+		},
+		{ key = "Escape", action = "PopKeyTable" }, -- Exit mode on Escape
+	},
+}
 -- and finally, return the configuration to wezterm
 return config

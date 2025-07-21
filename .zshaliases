@@ -109,3 +109,6 @@ alias kcx="kubectx"
 alias prsummary="git diff $(git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@')... | mods -R pr -r"
 alias aicommitmsg="git diff --staged | mods -R commit"
 
+# kickstart nvim
+alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
+
