@@ -4,19 +4,6 @@ hs.window.animationDuration = 0 -- disable animations
 local hammerKey = { "alt", "ctrl", "cmd", "shift" }
 local hyper = { "alt", "ctrl", "cmd" }
 
-local center = function(win)
-	local f = win:frame()
-	local screen = win:screen()
-	local max = screen:frame()
-	local padding = 25
-	-- geometry.rect(padding, padding, 1 - (padding * 2), 1 - (padding * 2))
-	f.x = max.x + padding
-	f.y = max.y + padding
-	f.w = max.w - (padding * 2)
-	f.h = max.h - (padding * 2)
-	win:setFrame(f)
-end
-
 local function primaryScreen()
 	return hs.screen.allScreens()[1]
 end
@@ -29,18 +16,21 @@ local function thirdScreen()
 	return hs.screen.allScreens()[3]
 end
 
+-- Move window to right screen
 hs.hotkey.bind(hyper, "R", function()
 	local targetScreen = thirdScreen()
 	local win = hs.window.focusedWindow()
 	win:moveToScreen(targetScreen)
 end)
 
+-- Move window to center screen
 hs.hotkey.bind(hyper, "C", function()
 	local targetScreen = primaryScreen()
 	local win = hs.window.focusedWindow()
 	win:moveToScreen(targetScreen)
 end)
 
+-- Move window to small (laptop) screen
 hs.hotkey.bind(hyper, "S", function()
 	local targetScreen = secondaryScreen()
 	local win = hs.window.focusedWindow()
@@ -174,21 +164,6 @@ hs.hotkey.bind(hyper, "t", function()
 	win:setFrame(f)
 end)
 
--- top 40%
-hs.hotkey.bind(hyper, "o", function()
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
-	local screen = win:screen()
-	local max = screen:frame()
-	local fourtypercent = max.h * 0.4
-
-	f.x = max.x
-	f.y = max.y
-	f.w = max.w
-	f.h = fourtypercent
-	win:setFrame(f)
-end)
-
 -- bottom half
 hs.hotkey.bind(hyper, "b", function()
 	local win = hs.window.focusedWindow()
@@ -204,19 +179,48 @@ hs.hotkey.bind(hyper, "b", function()
 	win:setFrame(f)
 end)
 
--- bottom 60%
-hs.hotkey.bind(hyper, "u", function()
+-- top 1/3
+hs.hotkey.bind(hyper, "p", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
 	local max = screen:frame()
+	local t = max.h / 3
 
-	local sixtypercent = max.h * 0.6
-	local fourtypercent = max.h * 0.4
 	f.x = max.x
-	f.y = max.y + fourtypercent
+	f.y = max.y
 	f.w = max.w
-	f.h = sixtypercent
+	f.h = t
+	win:setFrame(f)
+end)
+
+-- middle 1/3
+hs.hotkey.bind(hyper, ";", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+	local t = max.h / 3
+
+	f.x = max.x
+	f.y = max.y + t
+	f.w = max.w
+	f.h = t
+	win:setFrame(f)
+end)
+
+-- bottom 1/3
+hs.hotkey.bind(hyper, "/", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+	local t = max.h / 3
+
+	f.x = max.x
+	f.y = max.y + t * 2
+	f.w = max.w
+	f.h = t
 	win:setFrame(f)
 end)
 
@@ -239,9 +243,18 @@ bindAppToKey("M", "Spotify")
 -- Toggle Teams Mute
 local toggleMute = function()
 	local teams = hs.application.find("com.microsoft.teams2")
-	if not (teams == null) then
-		hs.eventtap.keyStroke({ "cmd", "shift" }, "m", 0, teams)
+	if teams == null then
+		-- teams not running
+		return
 	end
+	hs.eventtap.keyStroke({ "cmd", "shift" }, "m", 0, teams)
+	-- local currentFocus = hs.window.focusedWindow()
+	-- local teamsMainWindow = teams:mainWindow()
+	-- if not (teamsMainWindow == null) then
+	-- 	hs.eventtap.keyStroke({ "cmd", "shift" }, "m", 0, teams)
+	-- 	-- restore initial main window
+	-- 	-- currentFocus:becomeMain()
+	-- end
 end
 hs.hotkey.bind({}, "f12", toggleMute)
 

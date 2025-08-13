@@ -217,8 +217,8 @@ nmap <leader>tS <Action>(Stop)
 "" AI
 let g:WhichKeyDesc_ai = "<leader>a +ai"
 " GitHub Copilot Chat
-let g:WhichKeyDesc_ai_copilot_chat = "<leader>ac Copilot Chat"
-map <leader>ac <Action>(ActivateGitHubCopilotChatToolWindow)
+let g:WhichKeyDesc_ai_copilot_chat = "<leader>aa Copilot Chat"
+map <leader>aa <Action>(ActivateGitHubCopilotChatToolWindow)
 " GitHub Copilot Quick Chat 
 let g:WhichKeyDesc_ai_copilot_quick_chat = "<leader>aq Copilot Chat Quick Chat"
 map <leader>aq <Action>(copilot.chat.inline)

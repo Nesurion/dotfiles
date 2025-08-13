@@ -77,3 +77,5 @@ source ~/.zshaliases
 export GOOGLE_API_KEY="REPLACE_WITH_YOUR_GOOGLE_API_KEY"
 export AZURE_OPENAI_KEY="REPLACE_WITH_YOUR_AZURE_KEY"
 
+
+. "$HOME/.local/bin/env"

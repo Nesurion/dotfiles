@@ -80,7 +80,7 @@ alias lg="lazygit"
 
 # zoom
 alias zoom="open -a zoom.us 'https://leanix.zoom.us/j/93512421375'"
-alias devteams="open 'YOUR_TEAMS_MEETING_LINK_HERE'"
+alias teams="open 'YOUR_TEAMS_MEETING_LINK_HERE'"
 
 # eza
 if hash eza 2>/dev/null; then
