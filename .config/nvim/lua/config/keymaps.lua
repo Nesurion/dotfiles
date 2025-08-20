@@ -19,6 +19,26 @@ vim.keymap.set(
 )
 
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
+
+vim.keymap.set("n", "<leader><leader>", function()
+  local cwd = vim.fn.getcwd()
+
+  -- Check if we're in a Neo-tree buffer
+  if vim.bo.filetype == "neo-tree" then
+    local success, manager = pcall(require, "neo-tree.sources.manager")
+    if success then
+      local state = manager.get_state("filesystem")
+      if state and state.tree then
+        local node = state.tree:get_node()
+        if node then
+          cwd = node.type == "directory" and node.path or vim.fn.fnamemodify(node.path, ":h")
+        end
+      end
+    end
+  end
+
+  require("snacks").picker.files({ cwd = cwd })
+end, { desc = "Find Files (Neo-tree aware)" })
 -- Snacks explorer
 -- Open working dir
 -- vim.keymap.set("n", "<leader>e", function()

@@ -164,18 +164,18 @@ config.keys = {
 		end),
 	},
 	-- Close current pane alt-d (with confirmation for nvim)
-	{
-		key = "d",
-		mods = "ALT",
-		-- action = act.CloseCurrentPane({ confirm = false }),
-		action = wezterm.action_callback(function(window, pane, _)
-			if is_neovim(pane) then
-				window:perform_action(act.CloseCurrentPane({ confirm = true }), pane)
-			else
-				window:perform_action(act.CloseCurrentPane({ confirm = false }), pane)
-			end
-		end),
-	},
+	-- {
+	-- 	key = "d",
+	-- 	mods = "ALT",
+	-- 	-- action = act.CloseCurrentPane({ confirm = false }),
+	-- 	action = wezterm.action_callback(function(window, pane, _)
+	-- 		if is_neovim(pane) then
+	-- 			window:perform_action(act.CloseCurrentPane({ confirm = true }), pane)
+	-- 		else
+	-- 			window:perform_action(act.CloseCurrentPane({ confirm = false }), pane)
+	-- 		end
+	-- 	end),
+	-- },
 
 	-- Split
 	{
