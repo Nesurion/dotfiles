@@ -3,7 +3,8 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
-local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
+local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
+local history = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer-history")
 
 tabline.setup({
 	options = {
@@ -56,7 +57,7 @@ local config = wezterm.config_builder()
 -- Tabline provides a function to apply some recommended options to the config. If you already set these options in your wezterm.lua you do not need this function.
 -- This needs to be called after wezterm.setup().
 tabline.apply_to_config(config)
-workspace_switcher.apply_to_config(config)
+-- workspace_switcher.apply_to_config(config)
 
 -- This is where you actually apply your config choices
 
@@ -87,26 +88,51 @@ config.scrollback_lines = 10000
 
 config.window_close_confirmation = "NeverPrompt"
 
--- Worksapce Switcher
-workspace_switcher.workspace_formatter = function(label)
-	return wezterm.format({
-		{ Attribute = { Italic = false } },
-		{ Foreground = { AnsiColor = "Fuchsia" } },
-		-- { Background = { Color = "black" } },
-		{ Text = "󱂬 " .. label },
-	})
-end
-workspace_switcher.zoxide_path = "/opt/homebrew/bin/zoxide"
-workspace_switcher.switch_workspace({ extra_args = " | rg -Fxf ~/dev" })
+local sessionizer_schema = {
+	options = {
+		prompt = "Switch to workspace: ",
+		callback = history.Wrapper(sessionizer.DefaultCallback),
+	},
+	{
+		history.MostRecentWorkspace({}),
+		sessionizer.AllActiveWorkspaces({}),
+		processing = {
+			sessionizer.for_each_entry(
+				function(entry) -- recolors labels and replaces the absolute path to the home directory with ~
+					entry.label = wezterm.format({
+						{ Foreground = { Color = "#7aa2f7" } },
+						{ Text = entry.label:gsub(wezterm.home_dir, "~") },
+					})
+				end
+			),
+		},
+	},
+
+	wezterm.home_dir .. "/.config",
+
+	sessionizer.FdSearch({
+		wezterm.home_dir .. "/dev",
+		max_depth = 2,
+		fd_path = "/opt/homebrew/bin/fd",
+	}),
+
+	processing = {
+		-- sessionizer.for_each_entry(function(entry)
+		-- 	entry.label = entry.label:gsub(wezterm.home_dir, "~")
+		-- end),
+		sessionizer.for_each_entry(
+			function(entry) -- recolors labels and replaces the absolute path to the home directory with ~
+				entry.label = wezterm.format({
+					{ Text = entry.label:gsub(wezterm.home_dir, "~") },
+				})
+			end
+		),
+	},
+}
 
 local function is_neovim(pane)
 	local process_name = pane:get_foreground_process_name()
 	return process_name and (process_name:match("nvim") or process_name:match("n"))
-end
-
-local function is_lazygit(pane)
-	local process_name = pane:get_foreground_process_name()
-	return process_name and (process_name:match("lazygit") or process_name:match("lg"))
 end
 
 -- Keybindings
@@ -294,12 +320,12 @@ config.keys = {
 	{
 		key = "t",
 		mods = "CTRL|ALT",
-		action = workspace_switcher.switch_to_prev_workspace(),
+		action = history.switch_to_most_recent_workspace,
 	},
 	{
 		key = "t",
 		mods = "ALT",
-		action = workspace_switcher.switch_workspace(),
+		action = sessionizer.show(sessionizer_schema),
 	},
 }
 
