@@ -55,10 +55,12 @@ nmap <A-j> <Action>(MoveLineDown)
 nmap <A-k> <Action>(MoveLineUp)
 
 "" Camel case movement
-map E ]w
-map B [b
+"map E ]w
+"map B [b
 
+let g:WhichKeyDesc_o = "<leader>o Insert new line (below)"
 nmap <leader>o o<ESC>
+let g:WhichKeyDesc_o = "<leader>O Insert new line (above)"
 nmap <leader>O O<ESC>
 
 "" Buffer navigation
@@ -112,8 +114,8 @@ let g:WhichKeyDesc_goto = "g +goto"
 let g:WhichKeyDesc_goto_declaration = "gd Goto Declaration"
 nmap gd <Action>(GotoDeclaration)
 " References
-let g:WhichKeyDesc_goto_usage = "gu Find Usage"
-nmap gu <Action>(FindUsages)
+let g:WhichKeyDesc_goto_reference = "gr Find References"
+nmap gr <Action>(FindUsages)
 " Goto Implementation
 let g:WhichKeyDesc_goto_implementation = "gi Goto Implementation"
 nmap gi <Action>(GotoImplementation)
@@ -150,12 +152,13 @@ map <leader>co <Action>(OptimizeImports)
 " Line Diagnostic
 let g:WhichKeyDesc_code_diagnostic = "<leader>cd Line Diagnostics"
 map <leader>cd <Action>(ShowErrorDescription)
-" Collapse
-let g:WhichKeyDesc_collapse = "<cr> Collapse"
+" Folds
+let g:WhichKeyDesc_folds = "z +folds"
+let g:WhichKeyDesc_fold = "<cr> Fold"
 map <cr> <Action>(ExpandCollapseToggleAction)
-let g:WhichKeyDesc_collapse_all = "zM Collapse all"
+let g:WhichKeyDesc_folds_close_all = "zM Close all folds"
 map zM <Action>(CollapseAllRegions)
-let g:WhichKeyDesc_expand_all = "zR Expand all"
+let g:WhichKeyDesc_folds_open_all = "zR Open all folds"
 map zR <Action>(ExpandAllRegions)
 
 let g:WhichKeyDesc_code_format = "== Code Format"
