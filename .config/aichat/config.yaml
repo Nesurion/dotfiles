@@ -1,0 +1,12 @@
+# see https://github.com/sigoden/aichat/blob/main/config.example.yaml
+
+model: azure-openai:openai-gpt-4o-mini-deployment
+clients:
+  - type: azure-openai
+    api_base: https://lxproductinternal.openai.azure.com
+    api_key: REPLACE_WITH_YOUR_AZURE_KEY
+    models:
+      - name: openai-gpt-4o-mini-deployment
+        max_input_tokens: 128000
+        supports_vision: true
+        supports_function_calling: true

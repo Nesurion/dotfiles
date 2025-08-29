@@ -40,3 +40,20 @@ customCommands:
     description: "Use mods and AI to create a commit from the currently staged file changes."
     context: files
     output: "log"
+  - key: "t"
+    command: "gcob {{.Form.TicketId}} {{.Form.BranchName}}"
+    loadingText: "Creating branch from Jira ticket..."
+    description: "New branch based on jira ticket"
+    context: localBranches
+    prompts:
+      - type: "menuFromCommand"
+        title: "Which ticket do you want to use?"
+        key: "TicketId"
+        command: "jira issue list --plain --no-headers --columns key,summary -s~Done -s~Rejected -amaik.schwan@leanix.net"
+        filter: "^(?P<key>[A-Z]+-[0-9]+)\\s+(?P<value>.*)"
+        labelFormat: "{{ .key }}: {{ .value }}"
+        valueFormat: "{{ .key }}"
+      - type: "input"
+        title: "Enter branch description:"
+        key: "BranchName"
+        initialValue: ""

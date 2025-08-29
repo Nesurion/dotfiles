@@ -108,6 +108,7 @@ local sessionizer_schema = {
 		},
 	},
 
+	sessionizer.DefaultWorkspace({}),
 	wezterm.home_dir .. "/.config",
 
 	sessionizer.FdSearch({
