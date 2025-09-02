@@ -74,6 +74,8 @@ end
 
 hs.hotkey.bind(hyper, "m", maximize_window)
 hs.hotkey.bind(hyper, "f", maximize_window_full)
+
+-- window
 hs.hotkey.bind(hyper, "w", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
@@ -105,20 +107,6 @@ hs.hotkey.bind(hyper, "h", function()
 	win:setFrame(f)
 end)
 
--- 1/3 left
-hs.hotkey.bind(hyper, "j", function()
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
-	local screen = win:screen()
-	local max = screen:frame()
-
-	f.x = max.x
-	f.y = max.y
-	f.w = (max.w / 3) * 2
-	f.h = max.h
-	win:setFrame(f)
-end)
-
 -- 1/2 right
 hs.hotkey.bind(hyper, "l", function()
 	local win = hs.window.focusedWindow()
@@ -134,17 +122,47 @@ hs.hotkey.bind(hyper, "l", function()
 	win:setFrame(f)
 end)
 
--- 2/3 right
-hs.hotkey.bind(hyper, "k", function()
+-- 1/3 left
+hs.hotkey.bind(hyper, "z", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
 	local max = screen:frame()
-	local a_third = max.w / 3
+	local thirdWidth = (max.w / 3)
 
-	f.x = max.x + a_third
+	f.x = max.x
 	f.y = max.y
-	f.w = a_third * 2
+	f.w = thirdWidth
+	f.h = max.h
+	win:setFrame(f)
+end)
+
+-- 1/3 center
+hs.hotkey.bind(hyper, "x", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+	local thirdWidth = (max.w / 3)
+
+	f.x = max.x + thirdWidth
+	f.y = max.y
+	f.w = thirdWidth
+	f.h = max.h
+	win:setFrame(f)
+end)
+
+-- 1/3 right
+hs.hotkey.bind(hyper, "c", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+	local thirdWidth = (max.w / 3)
+
+	f.x = max.x + thirdWidth * 2
+	f.y = max.y
+	f.w = thirdWidth * 2
 	f.h = max.h
 	win:setFrame(f)
 end)
@@ -179,7 +197,7 @@ hs.hotkey.bind(hyper, "b", function()
 	win:setFrame(f)
 end)
 
--- top 1/3
+-- top 1/3 (vertical)
 hs.hotkey.bind(hyper, "p", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
@@ -194,7 +212,7 @@ hs.hotkey.bind(hyper, "p", function()
 	win:setFrame(f)
 end)
 
--- middle 1/3
+-- middle 1/3 (vertical)
 hs.hotkey.bind(hyper, ";", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
@@ -209,7 +227,7 @@ hs.hotkey.bind(hyper, ";", function()
 	win:setFrame(f)
 end)
 
--- bottom 1/3
+-- bottom 1/3 (vertical)
 hs.hotkey.bind(hyper, "/", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
