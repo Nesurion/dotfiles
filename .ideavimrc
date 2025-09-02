@@ -34,6 +34,10 @@ set ideajoin
 " https://plugins.jetbrains.com/plugin/25897-vim-functiontextobj
 set functiontextobj
 
+" vim-flash
+nmap s <Action>(flash.search)
+xmap s <Action>(flash.search)
+
 " Sneak
 "" Use sneak single char to replace f and t
 map f <Plug>Sneak_f
