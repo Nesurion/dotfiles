@@ -63,6 +63,7 @@ tabline.apply_to_config(config)
 
 -- For example, changing the color scheme:
 config.color_scheme = "Tokyo Night Moon"
+-- config.color_scheme = "Tokyo Night Day"
 
 config.inactive_pane_hsb = {
 	saturation = 0.6,
