@@ -123,7 +123,7 @@ hs.hotkey.bind(hyper, "l", function()
 end)
 
 -- 1/3 left
-hs.hotkey.bind(hyper, "z", function()
+hs.hotkey.bind(hyper, "q", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -138,7 +138,7 @@ hs.hotkey.bind(hyper, "z", function()
 end)
 
 -- 1/3 center
-hs.hotkey.bind(hyper, "x", function()
+hs.hotkey.bind(hyper, "a", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -153,7 +153,7 @@ hs.hotkey.bind(hyper, "x", function()
 end)
 
 -- 1/3 right
-hs.hotkey.bind(hyper, "c", function()
+hs.hotkey.bind(hyper, "z", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
