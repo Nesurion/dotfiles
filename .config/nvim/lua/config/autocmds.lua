@@ -9,3 +9,13 @@
 --
 
 -- vim.api.nvim_del_augroup_by_name("lazyvim_json_conceal")
+
+-- Disable markdown rendering for Obsidian vault files
+-- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+--   pattern = { "*/Obsidian/*", "*/obsidian/*" },
+--   callback = function()
+--     vim.b.render_markdown_enabled = false
+--     -- Also disable conceallevel for better readability
+--     vim.opt_local.conceallevel = 0
+--   end,
+-- })

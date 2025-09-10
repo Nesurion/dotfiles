@@ -5,3 +5,4 @@ vim.opt.relativenumber = true
 -- vim.g.lazyvim_picker = "fzf"
 vim.g.lazyvim_picker = "snacks"
 vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block"
+vim.opt.conceallevel = 1
