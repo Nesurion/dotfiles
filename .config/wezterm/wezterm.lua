@@ -12,6 +12,11 @@ tabline.setup({
 		theme = "Tokyo Night",
 		tabs_enabled = true,
 		theme_overrides = {
+			ui_mode = {
+				a = { fg = "#181825", bg = "#A6F7B1" },
+				b = { fg = "#A6F7B1", bg = "#313244" },
+				c = { fg = "#cdd6f4", bg = "#181825" },
+			},
 			window_mode = {
 				a = { fg = "#181825", bg = "#cba6f7" },
 				b = { fg = "#cba6f7", bg = "#313244" },
@@ -95,11 +100,13 @@ local sessionizer_schema = {
 		callback = history.Wrapper(sessionizer.DefaultCallback),
 	},
 	{
-		history.MostRecentWorkspace({}),
 		sessionizer.AllActiveWorkspaces({}),
 		processing = {
 			sessionizer.for_each_entry(
 				function(entry) -- recolors labels and replaces the absolute path to the home directory with ~
+					if entry.id == wezterm.home_dir .. "/OneDrive - SAP SE/Dokumente/obsidian/Work" then
+						entry.label = "obsidian"
+					end
 					entry.label = wezterm.format({
 						{ Foreground = { Color = "#7aa2f7" } },
 						{ Text = entry.label:gsub(wezterm.home_dir, "~") },
@@ -109,8 +116,11 @@ local sessionizer_schema = {
 		},
 	},
 
-	sessionizer.DefaultWorkspace({}),
+	history.MostRecentWorkspace({}),
+	sessionizer.DefaultWorkspace({ "default", "default" }),
 	wezterm.home_dir .. "/.config",
+	{ label = "obsidian", id = wezterm.home_dir .. "/OneDrive - SAP SE/Dokumente/obsidian/Work" },
+	{ label = "Github Dash", id = "ghd" },
 
 	sessionizer.FdSearch({
 		wezterm.home_dir .. "/dev",
@@ -142,6 +152,17 @@ config.leader = { key = " ", mods = "SHIFT", timeout_milliseconds = 1000 }
 config.keys = {
 	-- Enter window_mode
 	{ key = "w", mods = "LEADER", action = act.ActivateKeyTable({ name = "window_mode", one_shot = false }) },
+
+	-- Enter UI mode
+	{
+		key = "u",
+		mods = "LEADER",
+		action = wezterm.action.ActivateKeyTable({
+			name = "ui_mode",
+			one_shot = false,
+		}),
+	},
+
 	-- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
 	{
 		key = "LeftArrow",
@@ -255,28 +276,6 @@ config.keys = {
 		action = act.ActivatePaneDirection("Right"),
 	},
 
-	-- pane size
-	-- {
-	-- 	key = "h",
-	-- 	mods = "SHIFT|CMD",
-	-- 	action = act.AdjustPaneSize({ "Left", 5 }),
-	-- },
-	-- {
-	-- 	key = "j",
-	-- 	mods = "SHIFT|CMD",
-	-- 	action = act.AdjustPaneSize({ "Down", 5 }),
-	-- },
-	-- {
-	-- 	key = "k",
-	-- 	mods = "SHIFT|CMD",
-	-- 	action = act.AdjustPaneSize({ "Up", 5 }),
-	-- },
-	-- {
-	-- 	key = "l",
-	-- 	mods = "SHIFT|CMD",
-	-- 	action = act.AdjustPaneSize({ "Right", 5 }),
-	-- },
-
 	-- Zoom
 	{
 		key = "Enter",
@@ -332,6 +331,28 @@ config.keys = {
 }
 
 config.key_tables = {
+	["ui_mode"] = {
+		-- Toggle theme and exit mode
+		{
+			key = "b",
+			action = wezterm.action_callback(function(window, pane)
+				local overrides = window:get_config_overrides() or {}
+				if overrides.color_scheme == "Tokyo Night Day" then
+					overrides.color_scheme = "Tokyo Night Moon"
+				else
+					overrides.color_scheme = "Tokyo Night Day"
+				end
+				window:set_config_overrides(overrides)
+				-- Exit the mode
+				window:perform_action(wezterm.action.PopKeyTable, pane)
+			end),
+		},
+		-- Exit mode with Escape
+		{
+			key = "Escape",
+			action = "PopKeyTable",
+		},
+	},
 	["window_mode"] = {
 		{
 			key = "h",
