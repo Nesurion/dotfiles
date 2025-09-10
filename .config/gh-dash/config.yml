@@ -4,7 +4,7 @@ prSections:
 - title: My Pull Requests
   filters: is:open author:@me
 - title: Human PR Needs Review
-  filters: is:open review-requested:@me -author:app/renovate
+  filters: is:open review-requested:@me -author:app/renovate review:none
 - title: Involved
   filters: is:open involves:@me -author:@me
 - title: Needs My Review

@@ -34,6 +34,11 @@ set ideajoin
 " https://plugins.jetbrains.com/plugin/25897-vim-functiontextobj
 set functiontextobj
 
+" Switch
+" Enable all patterns from multiple groups
+set switch
+let g:switch_definitions = 'group:basic,group:java'
+
 " vim-flash
 nmap s <Action>(flash.search)
 xmap s <Action>(flash.search)
@@ -276,7 +281,7 @@ function! Invert()
 endfunction
 
 let g:WhichKeyDesc_invert_word = "<leader>i Invert word"
-nnoremap <leader>i :call Invert()<CR>i<ESC>
+nnoremap <leader>i :Switch<CR>
 
 "noremap <leader>dc diwxf)x
 
