@@ -72,6 +72,25 @@ local maximize_window_full = function()
 	win:setFrame(f)
 end
 
+-- scaled down window for ultrawide display
+hs.hotkey.bind(hyper, "n", function()
+	local win = hs.window.focusedWindow()
+	local f = win:frame()
+	local screen = win:screen()
+	local max = screen:frame()
+
+	local padding_width = 500
+	local column_width = max.w / 12
+
+	win:setFrame(max)
+
+	f.x = max.x + (2 * column_width)
+	f.y = max.y
+	f.w = max.w - (2 * 2 * column_width)
+	f.h = max.h
+	win:setFrame(f)
+end)
+
 hs.hotkey.bind(hyper, "m", maximize_window)
 hs.hotkey.bind(hyper, "f", maximize_window_full)
 
