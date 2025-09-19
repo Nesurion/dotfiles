@@ -4,16 +4,27 @@ hs.window.animationDuration = 0 -- disable animations
 local hammerKey = { "alt", "ctrl", "cmd", "shift" }
 local hyper = { "alt", "ctrl", "cmd" }
 
-local function primaryScreen()
-	return hs.screen.allScreens()[1]
+local function builtInScreen()
+	return hs.screen("Built%-in")
 end
 
 local function secondaryScreen()
-	return hs.screen.allScreens()[2]
+	-- search for screen with 1 in the name (at home LG ULTRAFINE (1))
+	local s = hs.screen("1")
+	if s == nil then
+		-- fallback to second screen if LG is not connected
+		s = hs.screen.allScreens()[2]
+	end
+	return s
 end
 
 local function thirdScreen()
-	return hs.screen.allScreens()[3]
+	local s = hs.screen("2")
+	if s == nil then
+		-- fallback to second screen if LG is not connected
+		s = hs.screen.allScreens()[3]
+	end
+	return s
 end
 
 -- Move window to right screen
@@ -25,14 +36,14 @@ end)
 
 -- Move window to center screen
 hs.hotkey.bind(hyper, "C", function()
-	local targetScreen = primaryScreen()
+	local targetScreen = secondaryScreen()
 	local win = hs.window.focusedWindow()
 	win:moveToScreen(targetScreen)
 end)
 
 -- Move window to small (laptop) screen
 hs.hotkey.bind(hyper, "S", function()
-	local targetScreen = secondaryScreen()
+	local targetScreen = builtInScreen()
 	local win = hs.window.focusedWindow()
 	win:moveToScreen(targetScreen)
 end)
