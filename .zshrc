@@ -99,3 +99,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 if [[ "$TERM_PROGRAM" == "ghostty" ]] && [[ -z "$TMUX" ]]; then
   exec tmux new-session -A -s main
 fi
+
+# homebrew installed apps completion
+fpath+=/opt/homebrew/share/zsh/site-functions
+autoload -Uz compinit && compinit
