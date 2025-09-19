@@ -14,20 +14,21 @@ bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
 
 # bat
-export BAT_THEME="tokyonight_night"
+export BAT_THEME_DARK="tokyonight_night"
+export BAT_THEME_LIGHT="tokyonight_day"
 
 # jenv
 eval "$(jenv init -)"
 
 # python
-export PATH="$(pyenv root)/shims:${PATH}"
+# export PATH="$(pyenv root)/shims:${PATH}"
 
 # goland
-export GOPATH=$HOME/golang
-export GOPROXY="direct"
-export GOROOT=/opt/homebrew/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+# export GOPATH=$HOME/golang
+# export GOPROXY="direct"
+# export GOROOT=/opt/homebrew/opt/go/libexec
+# export PATH=$PATH:$GOPATH/bin
+# export PATH=$PATH:$GOROOT/bin
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.oh-my-posh.toml)"
@@ -81,5 +82,6 @@ export AZURE_OPENAI_KEY="REPLACE_WITH_YOUR_AZURE_KEY"
 # jira
 export JIRA_API_TOKEN="REPLACE_WITH_YOUR_JIRA_TOKEN"
 
-
-. "$HOME/.local/bin/env"
+# homebrew installed apps completion
+fpath+=/opt/homebrew/share/zsh/site-functions
+autoload -Uz compinit && compinit
