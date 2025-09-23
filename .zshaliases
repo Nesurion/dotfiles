@@ -107,6 +107,6 @@ fi
 alias kcx="kubectx"
 
 # ai pr summary
-alias prsummary="git diff $(git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@')... | mods -R pr -r"
+alias prsummary="git diff \$(git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@')... | mods -R pr -r"
 alias aicommitmsg="git diff --staged | mods -R commit"
 
