@@ -1,7 +1,8 @@
 # OpenAI compatible REST API (openai, localai, anthropic, ...)
 default-api: copilot
 # Default model (gpt-3.5-turbo, gpt-4, ggml-gpt4all-j...)
-default-model: gpt-4
+# default-model: gpt-4
+default-model: gemini-2-flash
 # Text to append when using the -f flag
 format-text:
   markdown: "Format the response as markdown without enclosing backticks."
@@ -31,14 +32,13 @@ roles:
     - "Only generate the summary without a description."
     - "Only return the raw commit message. Do not add ``` markers or any other explanatory text."
   pr:
-    - "You are a git expert."
-    - "Your task is to write a pull request summary."
-    - "The user will provide a git diff, and you will create a pull request summary."
-    - "You will generate a title and a body."
-    - "A title is a one liner describing the changes, limited to 6 words."
-    - "A body is a list of up to 5 bullet points, summarizing the changes in the diff."
-    - "Output in markdown format, where the title is the headline and the body is a paragraph."
-    - "Only output the markdown without any formatting markers."
+    - "You are an expert software engineer reviewing code changes."
+    - "Analyze the provided git diff and create a clear, professional pull request summary."
+    - "Generate a concise title (50-72 characters) that describes the main change using imperative mood (e.g., 'Add user authentication', 'Fix memory leak in parser')."
+    - "Write a body with 2-5 bullet points explaining: what changed, why it changed, and any notable implementation details or impacts."
+    - "Focus on business value and technical significance. Mention breaking changes, new dependencies, or performance implications if present."
+    - "Use present tense for descriptions. Be specific about components, functions, or modules affected."
+    - "Format as markdown with title as # heading and body using dashes. Include no other formatting markers or explanatory text."
   prreview:
     - "You are a senior software developer."
     - "Your task is to review a pull request."
