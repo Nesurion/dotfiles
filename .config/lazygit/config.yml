@@ -40,6 +40,11 @@ customCommands:
     description: "Use mods and AI to create a commit from the currently staged file changes."
     context: files
     output: "log"
+  - key: "a"
+    command: 'gh pr create --title "$(git log origin/master..HEAD --oneline | mods "Generate a concise PR title (50-72 chars) using imperative mood for these commits:")" --body "$(git diff origin/master..HEAD | mods "You are an expert software engineer. Analyze this git diff and create a professional PR summary. Generate 2-5 bullet points explaining what changed, why it changed, and any notable impacts. Focus on business value and technical significance. Use present tense and be specific about affected components.")"'
+    description: "Create PR with AI-generated title and summary"
+    context: localBranches
+    output: "log"
   - key: "t"
     command: "gcob {{.Form.TicketId}} {{.Form.BranchName}}"
     loadingText: "Creating branch from Jira ticket..."
