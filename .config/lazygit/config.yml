@@ -41,7 +41,7 @@ customCommands:
     context: files
     output: "log"
   - key: "a"
-    command: 'gh pr create --title "$(git log origin/master..HEAD --oneline | mods "Generate a concise PR title (50-72 chars) using imperative mood for these commits:")" --body "$(git diff origin/master..HEAD | mods "You are an expert software engineer. Analyze this git diff and create a professional PR summary. Generate 2-5 bullet points explaining what changed, why it changed, and any notable impacts. Focus on business value and technical significance. Use present tense and be specific about affected components.")"'
+    command: 'MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || (git show-ref --verify --quiet refs/remotes/origin/main && echo "main") || echo "master"); gh pr create --title "$(git log origin/$MAIN_BRANCH..HEAD --oneline | mods "Generate a concise PR title (50-72 chars) using imperative mood for these commits:")" --body "$(git diff origin/$MAIN_BRANCH..HEAD | mods "You are an expert software engineer. Analyze this git diff and create a professional PR summary. Generate 2-5 bullet points explaining what changed, why it changed, and any notable impacts. Focus on business value and technical significance. Use present tense and be specific about affected components.")"'
     description: "Create PR with AI-generated title and summary"
     context: localBranches
     output: "log"
