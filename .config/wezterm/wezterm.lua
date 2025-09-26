@@ -94,6 +94,10 @@ config.scrollback_lines = 10000
 
 config.window_close_confirmation = "NeverPrompt"
 
+config.quick_select_patterns = {
+	"^([a-z0-9-]+-[a-z0-9]*-[a-z0-9]{5})",
+}
+
 local sessionizer_schema = {
 	options = {
 		prompt = "Switch to workspace: ",
@@ -244,14 +248,14 @@ config.keys = {
 	-- {
 	-- 	key = "u",
 	-- 	mods = "CTRL",
-	-- 	action = act.ScrollByPage(-0.25),
+	-- 	action = wezterm.action.SendString(""),
 	-- },
 	-- -- Down
 	{ key = "PageDown", action = act.ScrollByPage(0.25) },
 	-- {
 	-- 	key = "d",
 	-- 	mods = "CTRL",
-	-- 	action = act.ScrollByPage(0.25),
+	-- 	action = wezterm.action.SendString(""),
 	-- },
 
 	-- move pane focus
