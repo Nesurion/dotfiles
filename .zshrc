@@ -2,7 +2,7 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(gitfast zoxide history-substring-search docker kubectl azure fzf)
+plugins=(zoxide history-substring-search docker kubectl azure fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,6 +78,8 @@ source ~/.zshaliases
 export GOOGLE_API_KEY="REPLACE_WITH_YOUR_GOOGLE_API_KEY"
 export AZURE_OPENAI_KEY="REPLACE_WITH_YOUR_AZURE_KEY"
 
+# sap-ai-proxy
+alias sap-ai-proxy="docker run --env-file .env -p 127.0.0.1:3030:3030 --name sap-ai-proxy -d sap-ai-proxy"
 
 # jira
 export JIRA_API_TOKEN="REPLACE_WITH_YOUR_JIRA_TOKEN"

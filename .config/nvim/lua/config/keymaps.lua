@@ -17,6 +17,13 @@ vim.keymap.set(
   'viw"_dP',
   { noremap = true, desc = "Replace word under cursor with register content" }
 )
+-- Replace line with register content
+vim.keymap.set(
+  "n",
+  "<leader>dp",
+  '"_ddP',
+  { noremap = true, desc = "Replace the current line with the register content" }
+)
 
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
 

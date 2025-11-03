@@ -357,6 +357,7 @@ config.key_tables = {
 			action = "PopKeyTable",
 		},
 	},
+
 	["window_mode"] = {
 		{
 			key = "h",
