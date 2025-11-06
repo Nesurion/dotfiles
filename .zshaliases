@@ -24,9 +24,9 @@ gcob () {
 	git checkout -b feature/$branch_title
 }
 
-gcoa () {
+gcoi () {
   local branch_title=$(join_with_hypen $@)
-	git checkout -b feature/ATLAS-$branch_title
+	git checkout -b feature/ECO-$branch_title
 }
 
 gri () {
