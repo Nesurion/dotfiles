@@ -10,6 +10,9 @@
 
 -- vim.api.nvim_del_augroup_by_name("lazyvim_json_conceal")
 
+-- Disable yank highlighting
+vim.api.nvim_del_augroup_by_name("lazyvim_highlight_yank")
+
 -- Disable markdown rendering for Obsidian vault files
 -- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 --   pattern = { "*/Obsidian/*", "*/obsidian/*" },
