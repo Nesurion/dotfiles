@@ -143,9 +143,6 @@ map gf ?fun <CR>:nohlsearch<CR>w
 
 "" Code <leader>c
 let g:WhichKeyDesc_code = "<leader>c +code"
-" Rename File
-let g:WhichKeyDesc_code_rename_file = "<leader>cR Rename File"
-nmap <leader>cR <Action>(RenameFile)
 " Rename
 let g:WhichKeyDesc_code_rename = "<leader>cr Rename"
 nmap <leader>cr <Action>(RenameElement)
@@ -180,6 +177,15 @@ nmap <leader>e <Action>(ActivateProjectToolWindow)
 " Select in Project View
 let g:WhichKeyDesc_explorer_select = "<leader>E Select in Project View"
 nmap <leader>E <Action>(SelectInProjectView)
+
+"" File
+let g:WhichKeyDesc_file = "<leader>f +file"
+" Copy Absolute File Path
+let g:WhichKeyDesc_file_copy_absolute_path = "<leader>fa Copy Absolute File Path"
+nmap <leader>fa <Action>(CopyAbsolutePath)
+" Rename File
+let g:WhichKeyDesc_file_rename_file = "<leader>fr Rename File"
+nmap <leader>fr <Action>(RenameFile)
 
 "" Code Navigation
 " Find Files (Root Dir)

@@ -107,3 +107,7 @@ end, { desc = "Toggle Tokyo Night theme" })
 vim.keymap.set("n", "<leader>bn", function()
   vim.cmd("enew")
 end, { desc = "New buffer" })
+
+-- Page up/down scrolling
+vim.keymap.set("n", "<PageUp>", "<C-b>", { noremap = true, silent = true, desc = "Scroll page up" })
+vim.keymap.set("n", "<PageDown>", "<C-f>", { noremap = true, silent = true, desc = "Scroll page down" })
