@@ -14,6 +14,10 @@ return {
         redo = {
           enabled = true,
         },
+        yank = {
+          enabled = true,
+          default_animation = "reverse_fade",
+        },
       },
     })
   end,
