@@ -6,7 +6,6 @@ os:
 gui:
   shortTimeFormat: 03:04
   nerdFontsVersion: "3"
-
   # tokyo night moon theme
   theme:
     activeBorderColor:
@@ -33,8 +32,12 @@ gui:
       - "#c53b53"
     defaultFgColor:
       - "#c8d3f5"
-
 customCommands:
+  - key: "<c-d>"
+    command: 'MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || (git show-ref --verify --quiet refs/remotes/origin/main && echo "main") || echo "master"); git diff origin/$MAIN_BRANCH...HEAD'
+    description: "Show diff from main branch to current branch"
+    context: localBranches
+    output: terminal
   - key: "n"
     command: 'git commit -m "$(git diff --staged | mods -R commit)"'
     description: "Use mods and AI to create a commit from the currently staged file changes."
