@@ -16,7 +16,14 @@ return {
         },
         yank = {
           enabled = true,
-          default_animation = "reverse_fade",
+          default_animation = {
+            name = "fade",
+            settings = {
+              from_color = "#9ece6a",
+              min_duration = 400,
+              max_duration = 600,
+            },
+          },
         },
       },
     })

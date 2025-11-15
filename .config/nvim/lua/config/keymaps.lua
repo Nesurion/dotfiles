@@ -25,59 +25,6 @@ vim.keymap.set(
   { noremap = true, desc = "Replace the current line with the register content" }
 )
 
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
-
-vim.keymap.set("n", "<leader><leader>", function()
-  local cwd = vim.fn.getcwd()
-
-  -- Check if we're in a Neo-tree buffer
-  if vim.bo.filetype == "neo-tree" then
-    local success, manager = pcall(require, "neo-tree.sources.manager")
-    if success then
-      local state = manager.get_state("filesystem")
-      if state and state.tree then
-        local node = state.tree:get_node()
-        if node then
-          cwd = node.type == "directory" and node.path or vim.fn.fnamemodify(node.path, ":h")
-        end
-      end
-    end
-  end
-
-  require("snacks").picker.files({ cwd = cwd })
-end, { desc = "Find Files (Neo-tree aware)" })
-
-vim.keymap.set("n", "<leader>/", function()
-  local cwd = vim.fn.getcwd()
-
-  -- Check if we're in a Neo-tree buffer
-  if vim.bo.filetype == "neo-tree" then
-    local success, manager = pcall(require, "neo-tree.sources.manager")
-    if success then
-      local state = manager.get_state("filesystem")
-      if state and state.tree then
-        local node = state.tree:get_node()
-        if node then
-          -- Set cwd to the selected node's directory
-          cwd = (node.type == "directory") and node.path or vim.fn.fnamemodify(node.path, ":h")
-        end
-      end
-    end
-  end
-
-  -- Use the snacks picker to search for text in files within the specified cwd
-  require("snacks").picker.grep({
-    cwd = cwd, -- Limit the search to the selected directory
-    prompt_title = "Search in Files in " .. cwd,
-  })
-end, { desc = "Search in Files (Contents) in Neo-tree Directory" })
-
--- Snacks explorer
--- Open working dir
--- vim.keymap.set("n", "<leader>e", function()
---   Snacks.explorer.open()
--- end, { desc = "Snacks Explorer" })
-
 -- Map Enter to toggle code folding
 vim.api.nvim_set_keymap("n", "<CR>", "za", { noremap = true, silent = true })
 
@@ -90,18 +37,6 @@ end, { desc = "Delete Buffer" })
 vim.keymap.set({ "n", "v" }, "==", function()
   LazyVim.format({ force = true })
 end, { desc = "Format" })
-
--- Toggle between Tokyo Night and Tokyo Night Day
-vim.keymap.set("n", "<leader>ub", function()
-  local current_bg = vim.o.background
-  if current_bg == "dark" then
-    vim.o.background = "light"
-    vim.cmd("colorscheme tokyonight-day")
-  else
-    vim.o.background = "dark"
-    vim.cmd("colorscheme tokyonight")
-  end
-end, { desc = "Toggle Tokyo Night theme" })
 
 -- Create new buffer
 vim.keymap.set("n", "<leader>bn", function()
