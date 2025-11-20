@@ -264,6 +264,12 @@ nmap <leader>wh <Action>(SplitHorizontally)
 let g:WhichKeyDesc_window_split_vertical = "<leader>wv Split Vertical"
 nmap <leader>wv <Action>(SplitVertically)
 
+"" Search
+let g:WhichKeyDesc_search = "<leader>s +search"
+" Find and replace
+let g:WhichKeyDesc_search_find_and_replace = "<leader>sr Search and replace"
+nmap <leader>sr <Action>(ReplaceInPath)
+
 "" Invert word under cursor
 function! Invert()
   let antonyms = ['true', 'false',

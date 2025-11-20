@@ -46,3 +46,6 @@ end, { desc = "New buffer" })
 -- Page up/down scrolling
 vim.keymap.set("n", "<PageUp>", "<C-b>", { noremap = true, silent = true, desc = "Scroll page up" })
 vim.keymap.set("n", "<PageDown>", "<C-f>", { noremap = true, silent = true, desc = "Scroll page down" })
+
+-- Exit terminal insert mode with Esc Esc
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal insert mode" })

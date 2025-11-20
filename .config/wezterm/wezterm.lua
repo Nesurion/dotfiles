@@ -157,6 +157,9 @@ config.keys = {
 	-- Enter window_mode
 	{ key = "w", mods = "LEADER", action = act.ActivateKeyTable({ name = "window_mode", one_shot = false }) },
 
+	-- Shift-Enter inserts a newline
+	{ key = "Enter", mods = "SHIFT", action = wezterm.action({ SendString = "\x1b\r" }) },
+
 	-- Enter UI mode
 	{
 		key = "u",
