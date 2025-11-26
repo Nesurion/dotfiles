@@ -16,6 +16,8 @@ set relativenumber
 " enable surround
 set surround
 
+set NERDTree
+
 " Multiple cursors
 set multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
@@ -172,8 +174,8 @@ map == <Action>(ReformatCode)
 
 "" Project View
 " Focus Project View
-let g:WhichKeyDesc_explorer_focus = "<leader>e Project View"
-nmap <leader>e <Action>(ActivateProjectToolWindow)
+let g:WhichKeyDesc_explorer_focus = "<leader>e NERDTree"
+nmap <leader>e :NERDTree<CR>
 " Select in Project View
 let g:WhichKeyDesc_explorer_select = "<leader>E Select in Project View"
 nmap <leader>E <Action>(SelectInProjectView)

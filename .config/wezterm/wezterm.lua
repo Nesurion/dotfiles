@@ -6,6 +6,14 @@ local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabl
 local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
 local history = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer-history")
 
+-- Custom component to display zsh-vi-mode with colors
+local function zsh_vi_mode_component(window)
+	local pane = window:active_pane()
+	local mode = pane:get_user_vars().vimode or "INSERT"
+
+	return mode
+end
+
 tabline.setup({
 	options = {
 		icons_enabled = true,
@@ -49,7 +57,7 @@ tabline.setup({
 		tab_inactive = {},
 		tabline_x = {},
 		tabline_y = {},
-		tabline_z = {},
+		tabline_z = { zsh_vi_mode_component },
 	},
 	extensions = {},
 })
@@ -89,6 +97,12 @@ config.window_decorations = "RESIZE"
 -- }
 
 config.audible_bell = "Disabled"
+-- config.visual_bell = {
+-- 	fade_in_function = "EaseIn",
+-- 	fade_in_duration_ms = 150,
+-- 	fade_out_function = "EaseOut",
+-- 	fade_out_duration_ms = 150,
+-- }
 
 config.scrollback_lines = 10000
 
@@ -108,9 +122,6 @@ local sessionizer_schema = {
 		processing = {
 			sessionizer.for_each_entry(
 				function(entry) -- recolors labels and replaces the absolute path to the home directory with ~
-					if entry.id == wezterm.home_dir .. "/OneDrive - SAP SE/Dokumente/obsidian/Work" then
-						entry.label = "obsidian"
-					end
 					entry.label = wezterm.format({
 						{ Foreground = { Color = "#7aa2f7" } },
 						{ Text = entry.label:gsub(wezterm.home_dir, "~") },
@@ -123,7 +134,6 @@ local sessionizer_schema = {
 	history.MostRecentWorkspace({}),
 	sessionizer.DefaultWorkspace({ "default", "default" }),
 	wezterm.home_dir .. "/.config",
-	{ label = "obsidian", id = wezterm.home_dir .. "/OneDrive - SAP SE/Dokumente/obsidian/Work" },
 	{ label = "Github Dash", id = "ghd" },
 
 	sessionizer.FdSearch({
@@ -381,5 +391,6 @@ config.key_tables = {
 		{ key = "Escape", action = "PopKeyTable" }, -- Exit mode on Escape
 	},
 }
+
 -- and finally, return the configuration to wezterm
 return config

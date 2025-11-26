@@ -2,7 +2,34 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(zoxide history-substring-search docker kubectl azure fzf)
+plugins=(zoxide history-substring-search docker kubectl azure fzf zsh-vi-mode)
+
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_CURSOR_STYLE_ENABLED=false
+ZVM_VI_HIGHLIGHT_FOREGROUND=#c0caf5
+ZVM_VI_HIGHLIGHT_BACKGROUND=#2e3c64
+
+# zsh-vi-mode integration with wezterm
+# This function is called whenever vi mode changes
+function zvm_after_select_vi_mode() {
+  case $ZVM_MODE in
+    $ZVM_MODE_NORMAL)
+      printf '\033]1337;SetUserVar=%s=%s\007' vimode "$(echo -n 'NORMAL' | base64)"
+      ;;
+    $ZVM_MODE_INSERT)
+      printf '\033]1337;SetUserVar=%s=%s\007' vimode "$(echo -n 'INSERT' | base64)"
+      ;;
+    $ZVM_MODE_VISUAL)
+      printf '\033]1337;SetUserVar=%s=%s\007' vimode "$(echo -n 'VISUAL' | base64)"
+      ;;
+    $ZVM_MODE_VISUAL_LINE)
+      printf '\033]1337;SetUserVar=%s=%s\007' vimode "$(echo -n 'V-LINE' | base64)"
+      ;;
+    $ZVM_MODE_REPLACE)
+      printf '\033]1337;SetUserVar=%s=%s\007' vimode "$(echo -n 'REPLACE' | base64)"
+      ;;
+  esac
+}
 
 source $ZSH/oh-my-zsh.sh
 
