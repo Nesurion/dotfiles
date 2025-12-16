@@ -2,7 +2,7 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(zoxide history-substring-search docker kubectl azure fzf zsh-vi-mode)
+plugins=(zoxide history-substring-search docker kubectl azure fzf)
 
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_CURSOR_STYLE_ENABLED=false
@@ -31,7 +31,9 @@ function zvm_after_select_vi_mode() {
   esac
 }
 
-source $ZSH/oh-my-zsh.sh
+if [[ $- == *i* ]]; then
+  source $ZSH/oh-my-zsh.sh
+fi
 
 # Set neovim as the default editor
 export EDITOR='nvim'
@@ -115,3 +117,9 @@ export JIRA_API_TOKEN="REPLACE_WITH_YOUR_JIRA_TOKEN"
 # homebrew installed apps completion
 fpath+=/opt/homebrew/share/zsh/site-functions
 autoload -Uz compinit && compinit
+
+# sdkman
+export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+
+. "$HOME/.local/bin/env"
