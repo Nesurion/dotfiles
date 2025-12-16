@@ -54,10 +54,12 @@ tabline.setup({
 			{ "cwd", padding = { left = 0, right = 1 } },
 			{ "zoomed", padding = 0 },
 		},
-		tab_inactive = {},
+		tab_inactive = {
+			{ "index", padding = 1 },
+		},
 		tabline_x = {},
 		tabline_y = {},
-		tabline_z = { zsh_vi_mode_component },
+		tabline_z = {},
 	},
 	extensions = {},
 })
@@ -82,6 +84,20 @@ config.inactive_pane_hsb = {
 	saturation = 0.6,
 	brightness = 0.5,
 }
+
+-- Window focus handling - dims unfocused windows similar to inactive panes
+wezterm.on("window-focus-changed", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	if window:is_focused() then
+		overrides.text_background_opacity = nil
+		overrides.window_background_opacity = nil
+	else
+		-- Apply dimming similar to inactive_pane_hsb (saturation 0.6, brightness 0.5)
+		overrides.window_background_opacity = 0.75
+		overrides.text_background_opacity = 0.6
+	end
+	window:set_config_overrides(overrides)
+end)
 
 -- Font configuration
 config.font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "FiraCode Nerd Font" })
@@ -178,6 +194,29 @@ config.keys = {
 			name = "ui_mode",
 			one_shot = false,
 		}),
+	},
+
+	-- Swap panes
+	{
+		key = "p",
+		mods = "LEADER",
+		action = act.PaneSelect({
+			mode = "SwapWithActive",
+		}),
+	},
+
+	-- Create predefined two-pane layout with LEADER+d
+	{
+		key = "d",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window, pane)
+			-- Split vertically (creates a right pane at 30% width)
+			local right = pane:split({ direction = "Right", size = 0.3 })
+
+			-- Send commands to each pane
+			pane:send_text("nvim .\n")
+			right:send_text("claude\n")
+		end),
 	},
 
 	-- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
