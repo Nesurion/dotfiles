@@ -10,3 +10,6 @@ export JIRA_API_TOKEN="your-jira-api-token"
 
 # Ansible
 ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible-leanix-vault-pass.txt
+
+# Teams meeting link (optional)
+alias teams="open 'https://teams.microsoft.com/l/meetup-join/YOUR_MEETING_LINK_HERE'"
