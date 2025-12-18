@@ -49,3 +49,8 @@ vim.keymap.set("n", "<PageDown>", "<C-f>", { noremap = true, silent = true, desc
 
 -- Exit terminal insert mode with Esc Esc
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal insert mode" })
+
+-- Toggle relative line numbers
+vim.keymap.set("n", "<leader>ul", function()
+  vim.opt.relativenumber = not vim.opt.relativenumber:get()
+end, { noremap = true, silent = true, desc = "Toggle Relative Line Numbers" })
