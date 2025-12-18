@@ -1,0 +1,12 @@
+# Example private environment variables template
+# Copy this to .zshrc.local and fill in your actual values
+
+# SAP AI Proxy
+alias sap-ai-proxy="docker run --env-file /path/to/your/.env -p 127.0.0.1:3030:3030 --name sap-ai-proxy -d sap-ai-proxy"
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
+
+# Jira
+export JIRA_API_TOKEN="your-jira-api-token"
+
+# Ansible
+ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible-leanix-vault-pass.txt

@@ -87,7 +87,6 @@ function proddb {
 }
 
 # ansible
-ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible-leanix-vault-pass.txt
 export PATH="/opt/homebrew/opt/ansible@8/bin:$PATH"
 
 # fzf
@@ -103,16 +102,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 source ~/.zshaliases
 
-# google Gemini
-export GOOGLE_API_KEY="REPLACE_WITH_YOUR_GOOGLE_API_KEY"
-export AZURE_OPENAI_KEY="REPLACE_WITH_YOUR_AZURE_KEY"
-
-# sap-ai-proxy
-alias sap-ai-proxy="docker run --env-file /Users/I529035/dev/sap-ai-proxy/.env -p 127.0.0.1:3030:3030 --name sap-ai-proxy -d sap-ai-proxy"
-export ANTHROPIC_API_KEY="test-key-1"
-
-# jira
-export JIRA_API_TOKEN="REPLACE_WITH_YOUR_JIRA_TOKEN"
+# Load private environment variables (API keys, tokens, etc.)
+# This file is not tracked in git
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # homebrew installed apps completion
 fpath+=/opt/homebrew/share/zsh/site-functions
