@@ -272,6 +272,12 @@ let g:WhichKeyDesc_search = "<leader>s +search"
 let g:WhichKeyDesc_search_find_and_replace = "<leader>sr Search and replace"
 nmap <leader>sr <Action>(ReplaceInPath)
 
+"" UI
+let g:WhichKeyDesc_ui = "<leader>u +ui"
+" Toggle relative line numbers
+let g:WhichKeyDesc_ui_toggle_relative_numbers = "<leader>ul Toggle Relative Line Numbers"
+nmap <leader>ul :set relativenumber!<CR>
+
 "" Invert word under cursor
 function! Invert()
   let antonyms = ['true', 'false',
