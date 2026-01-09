@@ -1,8 +1,5 @@
 os:
   shellFunctionsFile: /Users/I529035/.zshaliases
-# git:
-#   paging:
-#     externalDiffCommand: difft --color=always
 gui:
   shortTimeFormat: 03:04
   nerdFontsVersion: "3"
@@ -32,6 +29,9 @@ gui:
       - "#c53b53"
     defaultFgColor:
       - "#c8d3f5"
+git:
+  pagers:
+    - pager: delta --no-gitconfig --syntax-theme tokyonight_moon --paging=never --diff-so-fancy --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 customCommands:
   - key: "<c-d>"
     command: 'MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || (git show-ref --verify --quiet refs/remotes/origin/main && echo "main") || echo "master"); git diff origin/$MAIN_BRANCH...HEAD'
