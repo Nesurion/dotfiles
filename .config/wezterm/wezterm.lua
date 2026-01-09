@@ -93,8 +93,8 @@ wezterm.on("window-focus-changed", function(window, pane)
 		overrides.window_background_opacity = nil
 	else
 		-- Apply dimming similar to inactive_pane_hsb (saturation 0.6, brightness 0.5)
-		overrides.window_background_opacity = 0.75
-		overrides.text_background_opacity = 0.6
+		overrides.window_background_opacity = 0.90
+		overrides.text_background_opacity = 0.8
 	end
 	window:set_config_overrides(overrides)
 end)
