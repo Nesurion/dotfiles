@@ -5,8 +5,10 @@
     diffFilter = delta --color-only --features=interactive
 
 [delta]
-    line-numbers = true
-    side-by-side = true
+  line-numbers = true
+	side-by-side = false
+	syntax-theme = tokyonight_moon
+  diff-so-fancy = true
 
 [delta "interactive"]
     keep-plus-minus-markers = false
