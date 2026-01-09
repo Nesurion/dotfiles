@@ -43,6 +43,11 @@ vim.keymap.set("n", "<leader>bn", function()
   vim.cmd("enew")
 end, { desc = "New buffer" })
 
+-- Reload buffer from file system
+vim.keymap.set("n", "<leader>br", function()
+  vim.cmd("edit!")
+end, { desc = "Reload buffer" })
+
 -- Page up/down scrolling
 vim.keymap.set("n", "<PageUp>", "<C-b>", { noremap = true, silent = true, desc = "Scroll page up" })
 vim.keymap.set("n", "<PageDown>", "<C-f>", { noremap = true, silent = true, desc = "Scroll page down" })
