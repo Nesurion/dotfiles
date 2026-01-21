@@ -91,10 +91,11 @@ wezterm.on("window-focus-changed", function(window, pane)
 	if window:is_focused() then
 		overrides.text_background_opacity = nil
 		overrides.window_background_opacity = nil
+		overrides.macos_window_background_blur = nil
 	else
-		-- Apply dimming similar to inactive_pane_hsb (saturation 0.6, brightness 0.5)
-		overrides.window_background_opacity = 0.90
+		overrides.window_background_opacity = 0.80
 		overrides.text_background_opacity = 0.8
+		overrides.macos_window_background_blur = 40
 	end
 	window:set_config_overrides(overrides)
 end)
@@ -123,6 +124,10 @@ config.audible_bell = "Disabled"
 config.scrollback_lines = 10000
 
 config.window_close_confirmation = "NeverPrompt"
+
+-- Cursor configuration
+config.default_cursor_style = "SteadyBlock"
+config.cursor_thickness = "200%"
 
 config.quick_select_patterns = {
 	"^([a-z0-9-]+-[a-z0-9]*-[a-z0-9]{5})",
