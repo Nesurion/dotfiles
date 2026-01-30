@@ -39,7 +39,7 @@ set functiontextobj
 " Switch
 " Enable all patterns from multiple groups
 set switch
-let g:switch_definitions = 'group:basic,group:java'
+let g:switch_definitions = 'group:basic,group:java,group:markdown'
 
 " vim-flash
 nmap s <Action>(flash.search)
@@ -301,7 +301,7 @@ function! Invert()
 endfunction
 
 let g:WhichKeyDesc_invert_word = "<leader>i Invert word"
-nnoremap <leader>i :Switch<CR>
+nnoremap <leader>i :call Invert()<CR>
 
 "noremap <leader>dc diwxf)x
 
