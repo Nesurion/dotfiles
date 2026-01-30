@@ -8,6 +8,11 @@ if [[ $- == *i* ]]; then
   source $ZSH/oh-my-zsh.sh
 fi
 
+# Initialize zoxide for non-interactive shells too
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
 # Set neovim as the default editor
 export EDITOR='nvim'
 
