@@ -1,8 +1,8 @@
 [core]
-    pager = delta
+  pager = delta
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only --features=interactive
 
 [delta]
   line-numbers = true
@@ -11,7 +11,7 @@
   diff-so-fancy = true
 
 [delta "interactive"]
-    keep-plus-minus-markers = false
+  keep-plus-minus-markers = false
 
 [alias]
   prune-branches = !git branch --merged origin/master | grep -vw master | xargs git branch -d
@@ -30,3 +30,6 @@
 
 [diff "ansible-vault"]
 	textconv = ansible-vault view
+
+[pull]
+	rebase = true
