@@ -40,7 +40,7 @@ customCommands:
     output: terminal
   - key: "n"
     # command: 'git commit -m "$(git diff --staged | claude --model haiku --print "Generate a concise git commit message for these staged changes. Output only the commit message, no explanation. Output the plain text only without any backticks. Also do not include the ticket id. Stick to the Conventional Commits format.")"'
-    command: 'claude --model haiku --print "/commit"'
+    command: 'claude --model haiku --print "commit the staged files. If no files are staged, commit all changes"'
     description: "Use claude to create a commit from the currently staged file changes."
     context: files
     output: "log"
