@@ -102,7 +102,7 @@ end)
 
 -- Font configuration
 config.font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "FiraCode Nerd Font" })
-config.font_size = 16.0
+config.font_size = 15.0
 
 -- Window configuration
 -- config.enable_tab_bar = true
