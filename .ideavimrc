@@ -113,6 +113,18 @@ let g:WhichKeyDesc_git = "<leader>g +github"
 " Git Blame Line
 let g:WhichKeyDesc_git_blame = "<leader>gb git blame"
 nmap <leader>gb <Action>(Annotate)
+" Git Diff
+let g:WhichKeyDesc_git_diff = "<leader>gd git diff"
+nmap <leader>gd <Action>(VcsShowCurrentChangeMarker)
+let g:WhichKeyDesc_git_diff_view = "<leader>gD git diff view"
+nmap <leader>gD <Action>(Vcs.ShowDiffChangedLines)
+" Rollback the current change (revert hunk)
+let g:WhichKeyDesc_git_rollback = "<leader>gr git rollback"
+nmap <leader>gr <Action>(Vcs.RollbackChangedLines)
+" Navigate between changes
+nmap <leader>gn <Action>(VcsShowNextChangeMarker)
+nmap <leader>gN <Action>(VcsShowPrevChangeMarker)
+" Git PR view
 let g:WhichKeyDesc_git_pr = "<leader>gp +pr"
 let g:WhichKeyDesc_git_pr_toggle = "<leader>gpt Toggle PR Review"
 nmap <leader>gpt <Action>(Github.Pull.Request.Review.In.Editor.Toggle)
