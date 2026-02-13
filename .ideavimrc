@@ -122,7 +122,9 @@ nmap <leader>gD <Action>(Vcs.ShowDiffChangedLines)
 let g:WhichKeyDesc_git_rollback = "<leader>gr git rollback"
 nmap <leader>gr <Action>(Vcs.RollbackChangedLines)
 " Navigate between changes
+let g:WhichKeyDesc_git_diff_next = "<leader>gn next diff"
 nmap <leader>gn <Action>(VcsShowNextChangeMarker)
+let g:WhichKeyDesc_git_diff_previous = "<leader>gN previous diff"
 nmap <leader>gN <Action>(VcsShowPrevChangeMarker)
 " Git PR view
 let g:WhichKeyDesc_git_pr = "<leader>gp +pr"
