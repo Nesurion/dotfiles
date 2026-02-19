@@ -6,12 +6,37 @@ local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabl
 local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
 local history = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer-history")
 
--- Custom component to display zsh-vi-mode with colors
-local function zsh_vi_mode_component(window)
+-- Custom component to display git branch
+local function git_branch_component(window)
 	local pane = window:active_pane()
-	local mode = pane:get_user_vars().vimode or "INSERT"
+	local cwd_uri = pane:get_current_working_dir()
+	if not cwd_uri then
+		return ""
+	end
 
-	return mode
+	local cwd = cwd_uri.file_path
+	if not cwd then
+		return ""
+	end
+
+	-- Run git to get the current branch
+	local success, stdout, stderr = wezterm.run_child_process({
+		"git",
+		"-C",
+		cwd,
+		"rev-parse",
+		"--abbrev-ref",
+		"HEAD",
+	})
+
+	if success then
+		local branch = stdout:gsub("%s+", "")
+		if branch ~= "" then
+			return wezterm.nerdfonts.dev_git_branch .. " " .. branch
+		end
+	end
+
+	return ""
 end
 
 tabline.setup({
@@ -57,7 +82,7 @@ tabline.setup({
 		tab_inactive = {
 			{ "index", padding = 1 },
 		},
-		tabline_x = {},
+		tabline_x = { git_branch_component },
 		tabline_y = {},
 		tabline_z = {},
 	},
