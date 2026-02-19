@@ -55,7 +55,9 @@ fpath+=/opt/homebrew/share/zsh/site-functions
 autoload -Uz compinit && compinit
 
 # sdkman
-export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
-[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+if [[ -d /opt/homebrew/opt/sdkman-cli/libexec ]]; then
+  export SDKMAN_DIR=/opt/homebrew/opt/sdkman-cli/libexec
+  [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+fi
 
 . "$HOME/.local/bin/env"
