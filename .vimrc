@@ -119,6 +119,6 @@ nnoremap C "_C
 nnoremap <leader>yy ^v$hy
 
 " Replace word under cursor with register content
-nnoremap <leader>p viw"_dP
+nnoremap <leader>p viwoh"_dP
 " nnoremap <leader>p "zdiW"+p
 
