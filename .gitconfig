@@ -28,6 +28,9 @@
 	email = maik.schwan@gmail.com
 	sshCommand = ssh -i ~/.ssh/nes_id_rsa
 
+[includeIf "gitdir:~/dev-sap/"]
+	email = maik.schwan@sap.com
+
 [diff "ansible-vault"]
 	textconv = ansible-vault view
 
