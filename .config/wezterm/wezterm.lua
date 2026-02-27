@@ -180,10 +180,17 @@ local sessionizer_schema = {
 	history.MostRecentWorkspace({}),
 	sessionizer.DefaultWorkspace({ "default", "default" }),
 	wezterm.home_dir .. "/.config",
+	wezterm.home_dir .. "/dev",
 	{ label = "Github Dash", id = "ghd" },
 
 	sessionizer.FdSearch({
 		wezterm.home_dir .. "/dev",
+		max_depth = 2,
+		fd_path = "/opt/homebrew/bin/fd",
+	}),
+
+	sessionizer.FdSearch({
+		wezterm.home_dir .. "/dev-sap",
 		max_depth = 2,
 		fd_path = "/opt/homebrew/bin/fd",
 	}),
