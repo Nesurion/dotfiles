@@ -104,6 +104,13 @@ fi
 # kubectx
 alias kcx="kubectx"
 
+# mermaid live preview
+mermaid () {
+  local base="${1:?Usage: mermaid <file.mmd>}"
+  base="/tmp/mermaid-${base:t:r}.png"
+  echo "$1" | entr -c sh -c "mmdc -i $1 -o $base -s 3 -e png && wezterm imgcat $base"
+}
+
 # ai pr summary
 alias prsummary="git diff \$(git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@')... | mods -R pr -r"
 alias aicommitmsg="git diff --staged | mods -R commit"
