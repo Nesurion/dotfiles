@@ -243,16 +243,41 @@ config.keys = {
 	},
 
 	-- Create predefined two-pane layout with LEADER+d
+	-- Java repos: IntelliJ + lazygit (left) + claude (right)
+	-- Other repos: nvim (left) + claude (right)
 	{
 		key = "d",
 		mods = "LEADER",
 		action = wezterm.action_callback(function(window, pane)
-			-- Split vertically (creates a right pane at 30% width)
-			local right = pane:split({ direction = "Right", size = 0.3 })
+			local cwd_uri = pane:get_current_working_dir()
+			local cwd = cwd_uri and cwd_uri.file_path or nil
+			local is_java = false
 
-			-- Send commands to each pane
-			pane:send_text("nvim .\n")
-			right:send_text("claude\n")
+			if cwd then
+				local java_markers = { "pom.xml", "build.gradle", "build.gradle.kts" }
+				for _, marker in ipairs(java_markers) do
+					local f = io.open(cwd .. "/" .. marker, "r")
+					if f then
+						f:close()
+						is_java = true
+						break
+					end
+				end
+			end
+
+			if is_java then
+				-- Open IntelliJ for the project
+				wezterm.run_child_process({ "open", "-a", "IntelliJ IDEA", cwd })
+				-- Split: left = lazygit, right = claude
+				local right = pane:split({ direction = "Right", size = 0.3 })
+				pane:send_text("lazygit\n")
+				right:send_text("claude\n")
+			else
+				-- Split: left = nvim, right = claude
+				local right = pane:split({ direction = "Right", size = 0.3 })
+				pane:send_text("nvim .\n")
+				right:send_text("claude\n")
+			end
 		end),
 	},
 
