@@ -6,7 +6,11 @@ return {
         explorer = {
           layout = {
             preset = "sidebar",
-            preview = "main",
+            preview = false,
+            layout = {
+              width = 0.3,
+              min_width = 40,
+            },
           },
         },
       },
