@@ -76,6 +76,16 @@ alias n="nvim"
 alias azsap="az login --tenant 69b863e3-480a-4ee9-8bd0-20a8adb6909b"
 alias azlx="az login --tenant 52ef8f7b-e339-4923-8e6a-fa9ee3304195"
 
+# azure keyvault browser (requires fzf)
+azkv () {
+  local vault="${1:?Usage: azkv <vault-name>}"
+  az keyvault secret list --vault-name "$vault" --query '[].name' -o tsv | \
+    fzf --preview "az keyvault secret show --vault-name $vault --name {} --query value -o tsv" \
+        --header "Secrets in $vault (enter to copy value)" \
+        --bind "enter:execute-silent(az keyvault secret show --vault-name $vault --name {} --query value -o tsv | pbcopy)+abort" \
+        --preview-window=down:3:wrap
+}
+
 # lazygit
 alias lg="lazygit"
 
@@ -108,7 +118,7 @@ alias kcx="kubectx"
 mermaid () {
   local base="${1:?Usage: mermaid <file.mmd>}"
   base="/tmp/mermaid-${base:t:r}.png"
-  echo "$1" | entr -c sh -c "mmdc -i $1 -o $base -s 3 -e png && wezterm imgcat $base"
+  echo "$1" | entr -c sh -c "mmdc -i $1 -o $base -s 4 -e png && wezterm imgcat $base"
 }
 
 # ai pr summary
