@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# lazygit-edit: Route file opens from lazygit
+# - Java/Kotlin → IntelliJ IDEA
+# - Everything else → existing nvim session, or error if none found
+
+file="$1"
+line="${2:-1}"
+
+# Convert to absolute path so remote nvim can find it
+[[ "$file" != /* ]] && file="$(pwd)/$file"
+
+# Pick nvim server: $NVIM is auto-set inside nvim's :terminal,
+# otherwise try well-known socket
+NVIM_ADDR="${NVIM:-/tmp/nvim.sock}"
+
+case "${file##*.}" in
+  java|kt|kts)
+    idea --line "$line" "$file"
+    ;;
+  *)
+    if [[ -S "$NVIM_ADDR" ]]; then
+      # If running inside nvim's terminal ($NVIM is set), capture the terminal buffer number
+      # first, then close it after opening the file (handles floating windows correctly)
+      if [[ -n "$NVIM" ]]; then
+        term_buf=$(nvim --server "$NVIM_ADDR" --remote-expr "bufnr('%')")
+        nvim --server "$NVIM_ADDR" --remote-send "<C-\\><C-n>:edit +${line} ${file}<CR>"
+        # Send 'q' into the terminal to quit lazygit cleanly (exit code 0), so snacks
+        # doesn't raise an error notification when the terminal closes
+        nvim --server "$NVIM_ADDR" --remote-send ":call chansend(getbufvar(${term_buf}, '&channel'), 'q')<CR>"
+      else
+        nvim --server "$NVIM_ADDR" --remote-send "<C-\\><C-n>:edit +${line} ${file}<CR>"
+      fi
+    else
+      echo "No nvim server found. Start nvim with: nvim --listen /tmp/nvim.sock" >&2
+      exit 1
+    fi
+    ;;
+esac
