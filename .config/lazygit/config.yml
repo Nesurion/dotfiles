@@ -1,5 +1,9 @@
 os:
   shellFunctionsFile: /Users/I529035/.zshaliases
+  edit: 'lazygit-edit {{filename}} 1'
+  editAtLine: 'lazygit-edit {{filename}} {{line}}'
+  editInTerminal: false
+  open: 'lazygit-edit {{filename}} 1'
 gui:
   shortTimeFormat: 03:04
   nerdFontsVersion: "3"
