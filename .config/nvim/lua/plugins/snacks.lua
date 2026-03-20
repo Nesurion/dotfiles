@@ -1,6 +1,7 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    bigfile = { line_length = 3000 },
     picker = {
       sources = {
         explorer = {
@@ -8,7 +9,7 @@ return {
             preset = "sidebar",
             preview = false,
             layout = {
-              width = 0.3,
+              width = 0.2,
               min_width = 40,
             },
           },
