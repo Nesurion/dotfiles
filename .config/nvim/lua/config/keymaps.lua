@@ -14,7 +14,7 @@ vim.keymap.set("n", "<leader>yy", "0wv$hy", { noremap = true })
 vim.keymap.set(
   "n",
   "<leader>p",
-  'viwoh"_dP',
+  'viw"_dP',
   { noremap = true, desc = "Replace word under cursor with register content" }
 )
 -- Replace line with register content
