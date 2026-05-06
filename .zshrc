@@ -79,4 +79,7 @@ if [[ -d /opt/homebrew/opt/sdkman-cli/libexec ]]; then
   [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
 fi
 
+# krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 . "$HOME/.local/bin/env"
