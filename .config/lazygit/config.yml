@@ -58,6 +58,11 @@ customCommands:
     loadingText: "Cleaning merged branches..."
     description: "Remove merged branches"
     context: localBranches
+  - key: "<c-r>"
+    command: "true"
+    description: "Reload lazygit"
+    context: global
+    output: "log"
   - key: "t"
     command: "gcob {{.Form.TicketId}} {{.Form.BranchName}}"
     loadingText: "Creating branch from Jira ticket..."
