@@ -25,11 +25,10 @@
 	autoSetupRemote = true
 
 [includeIf "gitdir:~/dev-private/"]
-	email = maik.schwan@gmail.com
-	sshCommand = ssh -i ~/.ssh/nes_id_rsa
+  path = ~/.gitconfig-private
 
 [includeIf "gitdir:~/dev-sap/"]
-	email = maik.schwan@sap.com
+  path = ~/.gitconfig-sap
 
 [diff "ansible-vault"]
 	textconv = ansible-vault view
