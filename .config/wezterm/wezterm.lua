@@ -106,8 +106,8 @@ config.color_scheme = "Tokyo Night Moon"
 -- config.color_scheme = "Tokyo Night Day"
 
 config.inactive_pane_hsb = {
-	saturation = 0.6,
-	brightness = 0.5,
+	saturation = 0.5,
+	brightness = 0.2,
 }
 
 -- Window focus handling - dims unfocused windows similar to inactive panes
@@ -182,6 +182,8 @@ local sessionizer_schema = {
 	wezterm.home_dir .. "/.config",
 	wezterm.home_dir .. "/dev",
 	{ label = "Github Dash", id = "ghd" },
+
+	{ label = "obsidian", id = wezterm.home_dir .. "/obsidian" },
 
 	sessionizer.FdSearch({
 		wezterm.home_dir .. "/dev",
