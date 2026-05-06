@@ -5,14 +5,8 @@ return {
     picker = {
       sources = {
         explorer = {
-          layout = {
-            preset = "sidebar",
-            preview = false,
-            layout = {
-              width = 0.2,
-              min_width = 40,
-            },
-          },
+          hidden = true,
+          ignored = true,
         },
       },
     },
