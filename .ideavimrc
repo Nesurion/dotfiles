@@ -206,7 +206,7 @@ nmap <leader>fr <Action>(RenameFile)
 "" Code Navigation
 " Find Files (Root Dir)
 let g:WhichKeyDesc_find_file = "<leader><space> Select in Project View"
-nmap <leader><space> <Action>(GotoFile)
+nmap <leader><space> <Action>(GotoClass)
 "nmap <Leader><space> <action>(com.mituuz.fuzzier.Fuzzier)
 " Switch Buffer
 let g:WhichKeyDesc_switcher_focus = "<leader>, Switch"
