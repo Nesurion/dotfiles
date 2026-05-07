@@ -7,6 +7,34 @@ return {
         explorer = {
           hidden = true,
           ignored = true,
+          on_change = function(_, item)
+            vim.g.explorer_current_path = (item and item.file) or ""
+          end,
+          actions = {
+            confirm = function(picker, item)
+              if picker.layout.opts.fullscreen then
+                picker.layout:maximize()
+              end
+              require("snacks.explorer.actions").actions.confirm(picker, item)
+            end,
+          },
+          on_show = function(picker)
+            local winid = picker.list.win.win
+            vim.keymap.set("n", "<cr>", function()
+              local item = picker:current()
+              if picker.layout.opts.fullscreen then
+                picker.layout:maximize()
+              end
+              require("snacks.explorer.actions").actions.confirm(picker, item, {})
+            end, { buffer = vim.api.nvim_win_get_buf(winid), nowait = true })
+          end,
+          win = {
+            list = {
+              keys = {
+                ["<cr>"] = "confirm",
+              },
+            },
+          },
         },
       },
     },
