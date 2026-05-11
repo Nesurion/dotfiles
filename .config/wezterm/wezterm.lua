@@ -491,6 +491,8 @@ config.key_tables = {
 			key = "l",
 			action = act.AdjustPaneSize({ "Right", 5 }),
 		},
+		{ key = "J", action = act.ScrollByPage(0.5) },
+		{ key = "K", action = act.ScrollByPage(-0.5) },
 		{ key = "Escape", action = "PopKeyTable" }, -- Exit mode on Escape
 	},
 }
