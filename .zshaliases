@@ -45,23 +45,23 @@ alias docker-socket="sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.so
 # kubectl
 # pods
 alias k="kubectl"
-alias kgp="kubectl get pods"
-alias kdp="kubectl describe pods"
-alias kgpw="watch 'kubectl get pods'"
+alias kgpw="viddy kubectl get pods"
+function vd() { viddy "$@"; }
 # logs
 alias klf="kubectl logs -f"
-# services
-alias kgs="kubectl get service"
-alias kds="kubectl describe service"
 # namespace
 alias kgns="kubectl get namespaces"
 alias kcn="kubectl config set-context --current --namespace"
-# configMap
-alias kgcm="kubectl get configmaps"
-alias kdcm="kubectl describe configmaps"
-# secret
-alias kgsec="kubectl get secret"
-alias kdsec="kubectl describe secret"
+
+# kubectl functions (use instead of aliases so viddy/watch can invoke them)
+function kgp()   { kubectl get pods "$@"; }
+function kdp()   { kubectl describe pods "$@"; }
+function kgs()   { kubectl get service "$@"; }
+function kds()   { kubectl describe service "$@"; }
+function kgcm()  { kubectl get configmaps "$@"; }
+function kdcm()  { kubectl describe configmaps "$@"; }
+function kgsec() { kubectl get secret "$@"; }
+function kdsec() { kubectl describe secret "$@"; }
 kssec () {
 	kubectl get secret $1 -o json | jq '.data | map_values(@base64d)'
 }
