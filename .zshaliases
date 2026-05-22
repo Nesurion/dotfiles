@@ -88,6 +88,7 @@ azkv () {
 
 # lazygit
 alias lg="lazygit"
+alias dlg='lazygit --git-dir="$HOME/.dotfiles" --work-tree="$HOME"'
 
 # teams - moved to .zshrc.local for privacy
 
@@ -111,6 +112,11 @@ if hash zoxide 2>/dev/null; then
   alias cd="z"
 fi
 
+# viddy
+if hash viddy 2>/dev/null; then
+  alias watch="viddy"
+fi
+
 # kubectx
 alias kcx="kubectx"
 
@@ -118,7 +124,7 @@ alias kcx="kubectx"
 mermaid () {
   local base="${1:?Usage: mermaid <file.mmd>}"
   base="/tmp/mermaid-${base:t:r}.png"
-  echo "$1" | entr -c sh -c "mmdc -i $1 -o $base -s 4 -e png && wezterm imgcat $base"
+  echo "$1" | entr -c sh -c "mmdc -i \"\$1\" -o \"$base\" -s 4 -e png && wezterm imgcat \"$base\"" _ "$1"
 }
 
 # ai pr summary
