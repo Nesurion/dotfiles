@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if ! command -v gitleaks &>/dev/null; then
+  echo "[warn] gitleaks not installed, skipping secret scan (https://github.com/gitleaks/gitleaks)"
+  exit 0
+fi
+
+output=$(gitleaks protect --staged 2>&1)
+exit_code=$?
+
+if [ $exit_code -ne 0 ]; then
+  echo "[warn] gitleaks detected potential secrets in staged files:"
+  echo "$output"
+fi
+
+exit 0
