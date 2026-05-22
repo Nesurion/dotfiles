@@ -131,3 +131,5 @@ mermaid () {
 alias prsummary="git diff \$(git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@')... | mods -R pr -r"
 alias aicommitmsg="git diff --staged | mods -R commit"
 
+# brew
+alias brewsave="brew bundle dump --force --mas --cask --brews --file=~/Brewfile"
