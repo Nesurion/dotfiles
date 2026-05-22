@@ -184,6 +184,7 @@ local sessionizer_schema = {
 	{ label = "Github Dash", id = "ghd" },
 
 	{ label = "obsidian", id = wezterm.home_dir .. "/obsidian" },
+	{ label = "iris-docs", id = wezterm.home_dir .. "/iris-docs" },
 
 	sessionizer.FdSearch({
 		wezterm.home_dir .. "/dev",
