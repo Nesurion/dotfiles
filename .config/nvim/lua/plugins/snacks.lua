@@ -40,6 +40,9 @@ return {
     },
   },
   keys = {
+    -- Disable LazyVim defaults so fff.nvim can claim them
+    { "<leader><space>", false },
+    { "<leader>/", false },
     -- Override the default <leader>e behavior to always open (not toggle)
     {
       "<leader>e",
