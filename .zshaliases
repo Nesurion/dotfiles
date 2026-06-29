@@ -45,8 +45,7 @@ alias docker-socket="sudo ln -s $HOME/.docker/run/docker.sock /var/run/docker.so
 # kubectl
 # pods
 alias k="kubectl"
-alias kgpw="viddy kubectl get pods"
-function vd() { viddy "$@"; }
+alias kgpw="hwatch kubectl get pods"
 # logs
 alias klf="kubectl logs -f"
 # namespace
@@ -112,13 +111,14 @@ if hash zoxide 2>/dev/null; then
   alias cd="z"
 fi
 
-# viddy
-if hash viddy 2>/dev/null; then
-  alias watch="viddy"
+# hwatch
+if hash hwatch 2>/dev/null; then
+  alias watch="hwatch"
 fi
 
 # kubectx
 alias kcx="kubectx"
+alias kns="kubens"
 
 # mermaid live preview
 mermaid () {
