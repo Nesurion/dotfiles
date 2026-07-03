@@ -39,7 +39,13 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 fi
 
 # fnm (fast node manager, replaces nvm)
-eval "$(fnm env --use-on-cd --shell zsh)"
+_fnm_cache="${XDG_CACHE_HOME:-$HOME/.cache}/fnm_init.zsh"
+if [[ ! -f "$_fnm_cache" ]] || [[ $(whence -p fnm) -nt "$_fnm_cache" ]]; then
+  mkdir -p "${_fnm_cache:h}"
+  fnm env --use-on-cd --shell zsh > "$_fnm_cache"
+fi
+source "$_fnm_cache"
+unset _fnm_cache
 
 # ansible
 export PATH="/opt/homebrew/opt/ansible@8/bin:$PATH"
@@ -67,16 +73,20 @@ source ~/.zshaliases
 # homebrew installed apps completion (cached — rebuilds once per day)
 fpath+=/opt/homebrew/share/zsh/site-functions
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump*(#qN.mh+24) ]]; then
   compinit
 else
   compinit -C
 fi
 
-# sdkman
+# sdkman (lazy-loaded)
 if [[ -d /opt/homebrew/opt/sdkman-cli/libexec ]]; then
-  export SDKMAN_DIR=/opt/homebrew/opt/sdkman-cli/libexec
-  [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+  sdk() {
+    unfunction sdk
+    export SDKMAN_DIR=/opt/homebrew/opt/sdkman-cli/libexec
+    [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+    sdk "$@"
+  }
 fi
 
 # krew
