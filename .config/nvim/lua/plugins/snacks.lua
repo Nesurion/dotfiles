@@ -32,6 +32,7 @@ return {
             list = {
               keys = {
                 ["<cr>"] = "confirm",
+                ["<leader>/"] = false,
               },
             },
           },
