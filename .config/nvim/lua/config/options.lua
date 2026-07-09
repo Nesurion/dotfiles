@@ -4,3 +4,7 @@
 
 -- Enable system clipboard integration
 -- vim.opt.clipboard = "unnamedplus"
+
+-- Allow gf / mkdnflow to find .md files recursively
+vim.opt.path:append("**")
+vim.opt.suffixesadd:append(".md")
