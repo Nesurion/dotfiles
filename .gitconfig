@@ -1,6 +1,9 @@
 [core]
   pager = delta
 
+[diff]
+  colorMoved = default
+
 [interactive]
   diffFilter = delta --color-only --features=interactive
 
@@ -8,6 +11,8 @@
   line-numbers = true
 	side-by-side = false
 	syntax-theme = tokyonight_moon
+  features = zebra-dark
+  map-styles = bold purple => syntax "#2d1b4e", bold cyan => syntax "#0d3344"
 
 [delta "interactive"]
   keep-plus-minus-markers = false
