@@ -1,3 +1,5 @@
+services:
+  "github.com": "github:github.com"
 os:
   shellFunctionsFile: /Users/I529035/.zshaliases
   edit: "lazygit-edit {{filename}} 1"
