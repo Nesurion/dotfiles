@@ -1,0 +1,9 @@
+contexts:
+  default: {}
+  grafana-leanix-net:
+    grafana:
+      server: https://grafana.leanix.net
+      token: keychain:gcx:grafana-leanix-net:grafana-token
+      auth-method: token
+      org-id: 1
+current-context: grafana-leanix-net
