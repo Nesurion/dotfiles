@@ -1,0 +1,35 @@
+# Font
+font-family = JetBrainsMono Nerd Font
+font-size = 15
+
+# Theme
+theme = TokyoNight Moon
+
+# Window
+window-decoration = false
+window-padding-x = 4
+window-padding-y = 4
+title = " "
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Bell
+bell-features = no-system,no-audio,no-attention
+
+# Scrollback
+scrollback-limit = 10000
+
+# Opacity (static — WezTerm's focus-based blur not available in Ghostty)
+background-opacity = 0.95
+
+# Shell integration
+shell-integration = zsh
+
+# Splits — translate Cmd+Option+V/H to escape sequences tmux can bind
+keybind = cmd+opt+v=text:\x02|
+keybind = cmd+opt+h=text:\x02-
+keybind = cmd+w=text:\x02x
+# Translate Shift+Space to Ctrl+B (tmux prefix)
+keybind = shift+space=text:\x02

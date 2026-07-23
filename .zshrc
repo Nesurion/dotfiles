@@ -58,6 +58,7 @@ if [[ ! -f "$_fzf_cache" ]] || [[ $(whence -p fzf) -nt "$_fzf_cache" ]]; then
 fi
 source "$_fzf_cache"
 unset _fzf_cache
+bindkey -r '^T'  # free Ctrl+T for tmux sessionizer
 # fzf git
 source ~/.fzf-git.sh
 
@@ -93,3 +94,8 @@ fi
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 . "$HOME/.local/bin/env"
+
+# Auto-start tmux only in Ghostty
+if [[ "$TERM_PROGRAM" == "ghostty" ]] && [[ -z "$TMUX" ]]; then
+  exec tmux new-session -A -s main
+fi
