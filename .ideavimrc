@@ -128,6 +128,8 @@ let g:WhichKeyDesc_git_diff_previous = "<leader>gN previous diff"
 nmap <leader>gN <Action>(VcsShowPrevChangeMarker)
 " Git PR view
 let g:WhichKeyDesc_git_pr = "<leader>gp +pr"
+let g:WhichKeyDesc_git_pr_view = "<leader>gpv PR view"
+nmap <leader>gpv <Action>(Github.View.Pull.Request)
 let g:WhichKeyDesc_git_pr_toggle = "<leader>gpt Toggle PR Review"
 nmap <leader>gpt <Action>(Github.Pull.Request.Review.In.Editor.Toggle)
 let g:WhichKeyDesc_git_pr_comment = "<leader>gpc Comment"
