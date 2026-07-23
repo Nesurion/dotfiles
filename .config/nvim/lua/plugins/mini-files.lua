@@ -16,14 +16,14 @@ return {
       pattern = "MiniFilesBufferCreate",
       callback = function(args)
         local buf = args.data.buf_id
-        vim.keymap.set("n", "gy", function()
+        vim.keymap.set("n", "<leader>y", function()
           local entry = MiniFiles.get_fs_entry()
           if entry then
             vim.fn.setreg("+", entry.name)
             vim.notify("Yanked: " .. entry.name)
           end
         end, { buffer = buf, desc = "Yank filename" })
-        vim.keymap.set("n", "gf", function()
+        vim.keymap.set("n", "<leader>f", function()
           local entry = MiniFiles.get_fs_entry()
           if entry then
             vim.fn.setreg("+", entry.path)
@@ -45,7 +45,7 @@ return {
       desc = "Explorer (mini.files)",
     },
     {
-      "<leader>fE",
+      "<leader>E",
       function()
         local mf = require("mini.files")
         if not mf.close() then
