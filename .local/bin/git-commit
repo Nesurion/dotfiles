@@ -1,0 +1,116 @@
+#!/usr/bin/env rust-script
+//! Non-interactive AI-powered git commit for staged changes.
+//! Usage: git-commit [--dry-run]
+//!
+//! ```cargo
+//! [dependencies]
+//! ```
+use std::env;
+use std::fs;
+use std::io::Write;
+use std::process::{Command, Stdio};
+
+fn run(args: &[&str]) -> Result<String, String> {
+    let output = Command::new(args[0])
+        .args(&args[1..])
+        .output()
+        .map_err(|e| format!("Failed to run `{}`: {}", args[0], e))?;
+    if !output.status.success() {
+        return Err(String::from_utf8_lossy(&output.stderr).trim().to_string());
+    }
+    Ok(String::from_utf8_lossy(&output.stdout).trim().to_string())
+}
+
+fn main() {
+    let dry_run = env::args().any(|a| a == "--dry-run");
+
+    let diff = match run(&["git", "diff", "--cached"]) {
+        Ok(d) if !d.is_empty() => d,
+        Ok(_) => {
+            eprintln!("Nothing staged. Use `git add` first.");
+            std::process::exit(1);
+        }
+        Err(e) => {
+            eprintln!("git diff failed: {e}");
+            std::process::exit(1);
+        }
+    };
+    const MAX_DIFF_BYTES: usize = 20_000;
+    let diff = if diff.len() > MAX_DIFF_BYTES {
+        eprintln!(
+            "Warning: staged diff is large ({} bytes), truncating to {} bytes for Claude.",
+            diff.len(),
+            MAX_DIFF_BYTES
+        );
+        diff[..MAX_DIFF_BYTES].to_string()
+    } else {
+        diff
+    };
+
+    let log = run(&["git", "log", "--oneline", "-10"]).unwrap_or_default();
+
+    let prompt = format!(
+        r#"You are a git commit message expert. Generate a conventional commit message for the staged changes below.
+Rules:
+- Format: `<type>(<optional scope>) <short description>`
+- Types: feat, fix, refactor, chore, docs, test, style, perf, ci
+- Subject line: max 72 chars, imperative mood, no trailing period
+- If useful, add a blank line then a short body (why, not what)
+- Output ONLY the commit message — no explanation, no markdown fences
+Recent commits (for style reference):
+{log}
+Staged diff:
+{diff}
+"#
+    );
+
+    let mut child = Command::new("claude")
+        .args(["--print", "--allowedTools", "none", "--model", "haiku"])
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .expect("Failed to spawn claude");
+
+    child
+        .stdin
+        .take()
+        .unwrap()
+        .write_all(prompt.as_bytes())
+        .expect("Failed to write to claude stdin");
+
+    let output = child.wait_with_output().expect("Failed to wait for claude");
+
+    if !output.status.success() {
+        eprintln!(
+            "Claude failed:\n{}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+        std::process::exit(1);
+    }
+
+    let commit_msg = String::from_utf8_lossy(&output.stdout).trim().to_string();
+
+    if dry_run {
+        println!("{}", commit_msg);
+        return;
+    }
+
+    println!("Commit message:\n\n{}\n", commit_msg);
+
+    let tmp_path = format!("/tmp/git-commit-msg-{}.txt", std::process::id());
+    let tmp_path = tmp_path.as_str();
+    fs::write(tmp_path, &commit_msg).expect("Failed to write temp file");
+
+    let status = Command::new("git")
+        .args(["commit", "-F", tmp_path])
+        .status()
+        .expect("Failed to run git commit");
+
+    let _ = fs::remove_file(tmp_path);
+
+    if !status.success() {
+        eprintln!("git commit failed");
+        std::process::exit(1);
+    }
+}
