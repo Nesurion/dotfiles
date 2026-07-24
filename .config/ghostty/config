@@ -20,6 +20,10 @@ bell-features = no-system,no-audio,no-attention
 
 # Scrollback
 scrollback-limit = 10000
+copy-on-select = clipboard
+
+# Let terminal handle text selection even when app requests mouse events
+mouse-shift-capture = false
 
 # Opacity (static — WezTerm's focus-based blur not available in Ghostty)
 background-opacity = 0.95
