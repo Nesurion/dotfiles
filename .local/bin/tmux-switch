@@ -1,0 +1,101 @@
+#!/usr/bin/env zsh
+
+# Tmux session switcher — scans SEARCH_PATHS (1 level deep) + SPECIFIC_PATHS
+# Environment overrides:
+#   TMUX_SESSIONIZER_SEARCH_PATHS   — space-separated parent dirs to scan
+#   TMUX_SESSIONIZER_SPECIFIC_PATHS — space-separated individual dirs to include
+
+SEARCH_PATHS=(${=TMUX_SESSIONIZER_SEARCH_PATHS:-"$HOME/dev"})
+SPECIFIC_PATHS=(${=TMUX_SESSIONIZER_SPECIFIC_PATHS:-"$HOME/obsidian $HOME/iris-docs $HOME/.config"})
+
+dirs=()
+for p in $SEARCH_PATHS; do
+  [[ -d $p ]] && dirs+=($p/*(N/))
+done
+for p in $SPECIFIC_PATHS; do
+  [[ -d $p ]] && dirs+=($p)
+done
+
+build_list() {
+  local active=(${(f)"$(tmux list-sessions -F '#{session_name}' 2>/dev/null)"})
+  typeset -A active_shown
+  typeset -A dir_names
+  for d in $dirs; do dir_names[${d:t}]=1; done
+
+  # All active sessions at the top, highlighted
+  for s in $active; do
+    printf "\033[38;2;130;170;255m%s\033[0m\n" "$s"
+    active_shown[$s]=1
+  done
+
+  # Directories not already listed above
+  for d in $dirs; do
+    local name=${d:t}
+    [[ -n ${active_shown[$name]} ]] && continue
+    printf "%s\n" "${d/#$HOME/\~}"
+  done
+}
+
+[[ $1 == --list ]] && { build_list; exit 0 }
+
+(( ${#dirs} == 0 )) && { echo "No directories found"; exit 1 }
+
+LAST_SESSION_FILE="${XDG_RUNTIME_DIR:-$HOME/.local/state}/tmux-last-session"
+
+# --last: toggle to the previously active session
+if [[ $1 == --last ]]; then
+  [[ ! -f $LAST_SESSION_FILE ]] && exit 0
+  last=$(cat "$LAST_SESSION_FILE")
+  current=$(tmux display-message -p '#S' 2>/dev/null)
+  [[ -z $last || $last == $current ]] && exit 0
+  if tmux list-sessions -F '#{session_name}' 2>/dev/null | grep -qx "$last"; then
+    echo "$current" > "$LAST_SESSION_FILE"
+    tmux switch-client -t "$last"
+  fi
+  exit 0
+fi
+
+selected=$(build_list | fzf \
+  --ansi \
+  --prompt="  session: " \
+  --header="enter: switch  ctrl-d: kill session" \
+  --height=50% \
+  --reverse \
+  --no-info \
+  --tiebreak=index \
+  --bind="ctrl-d:execute-silent(
+    raw=\$(echo {} | sed 's/\x1b\[[0-9;]*m//g');
+    name=\${raw##*/};
+    tmux kill-session -t \"\$name\" 2>/dev/null
+  )+reload($0 --list)")
+
+do_switch() {
+  local name=$1 cwd=$2
+  local current=$(tmux display-message -p '#S' 2>/dev/null)
+  [[ -n $current ]] && echo "$current" > "$LAST_SESSION_FILE"
+
+  if tmux list-sessions -F '#{session_name}' 2>/dev/null | grep -qx "$name"; then
+    tmux switch-client -t "$name"
+  else
+    if [[ -n $cwd ]]; then
+      tmux new-session -ds "$name" -c "$cwd"
+    else
+      tmux new-session -ds "$name"
+    fi
+    tmux switch-client -t "$name"
+  fi
+}
+
+[[ -z $selected ]] && exit 0
+
+clean=$(echo "$selected" | sed 's/\x1b\[[0-9;]*m//g')
+
+# Bare name — existing session with no dir match
+if [[ $clean != */* ]]; then
+  do_switch "$clean"
+  exit 0
+fi
+
+# Directory path
+clean=${clean/#\~/$HOME}
+do_switch "${clean:t}" "$clean"
