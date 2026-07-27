@@ -11,18 +11,19 @@ Personal dotfiles managed using a bare Git repository.
 git clone --bare git@github.com:Nesurion/dotfiles.git $HOME/.dotfiles
 
 # Create an alias for managing dotfiles
-alias config='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 # Checkout the dotfiles
-config checkout
+dotfiles checkout
 
 # Set the flag to not show untracked files
-config config --local status.showUntrackedFiles no
+dotfiles config --local status.showUntrackedFiles no
 ```
 
 ### Configure private environment variables
 
 1. Copy the example file:
+
    ```bash
    cp ~/.zshrc.local.example ~/.zshrc.local
    ```
@@ -37,13 +38,13 @@ config config --local status.showUntrackedFiles no
 
 ## Usage
 
-Use the `config` alias instead of `git`:
+Use the `dotfiles` alias instead of `git`:
 
 ```bash
-config status
-config add .vimrc
-config commit -m "Update vimrc"
-config push
+dotfiles status
+dotfiles add .vimrc
+dotfiles commit -m "Update vimrc"
+dotfiles push
 ```
 
 ## What's included
@@ -68,13 +69,13 @@ Then inside tmux, press `prefix + I` to fetch and install all plugins.
 
 ### Plugins
 
-| Plugin | Purpose |
-|--------|---------|
-| [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) | Sane defaults everyone can agree on |
-| [tmux-oasis](https://github.com/uhs-robert/tmux-oasis) | Status bar theme framework |
-| [tmux-fzf-url](https://github.com/wfxr/tmux-fzf-url) | Open URLs from terminal history with fzf (`prefix + u`) |
-| [tmux-floax](https://github.com/omerxx/tmux-floax) | Floating scratch pane (`prefix + f`, menu `prefix + F`) |
-| [tmux-which-key](https://github.com/alexwforsythe/tmux-which-key) | Which-key popup for tmux bindings |
+| Plugin                                                            | Purpose                                                 |
+| ----------------------------------------------------------------- | ------------------------------------------------------- |
+| [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible)    | Sane defaults everyone can agree on                     |
+| [tmux-oasis](https://github.com/uhs-robert/tmux-oasis)            | Status bar theme framework                              |
+| [tmux-fzf-url](https://github.com/wfxr/tmux-fzf-url)              | Open URLs from terminal history with fzf (`prefix + u`) |
+| [tmux-floax](https://github.com/omerxx/tmux-floax)                | Floating scratch pane (`prefix + f`, menu `prefix + F`) |
+| [tmux-which-key](https://github.com/alexwforsythe/tmux-which-key) | Which-key popup for tmux bindings                       |
 
 ### Custom Oasis Tokyo Night Moon theme
 
