@@ -59,16 +59,6 @@ final_space = true
       cache_duration = 'none'
       threshold = 5000
 
-  [[blocks.segments]]
-    template = ' {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} '
-    foreground = 'blue'
-    background = 'transparent'
-    type = 'kubectl'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      cache_duration = 'none'
-
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
