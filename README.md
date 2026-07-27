@@ -51,7 +51,58 @@ config push
 - **zsh** configuration with oh-my-zsh
 - **vim/neovim** configuration
 - **git** configuration
+- **tmux** configuration with TPM plugins and custom Oasis theme
 - Various dotfiles for tools like fzf, lazygit, etc.
+
+## tmux
+
+### Plugin manager
+
+Plugins are managed via [TPM](https://github.com/tmux-plugins/tpm). Install it once:
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+Then inside tmux, press `prefix + I` to fetch and install all plugins.
+
+### Plugins
+
+| Plugin | Purpose |
+|--------|---------|
+| [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) | Sane defaults everyone can agree on |
+| [tmux-oasis](https://github.com/uhs-robert/tmux-oasis) | Status bar theme framework |
+| [tmux-fzf-url](https://github.com/wfxr/tmux-fzf-url) | Open URLs from terminal history with fzf (`prefix + u`) |
+| [tmux-floax](https://github.com/omerxx/tmux-floax) | Floating scratch pane (`prefix + f`, menu `prefix + F`) |
+| [tmux-which-key](https://github.com/alexwforsythe/tmux-which-key) | Which-key popup for tmux bindings |
+
+### Custom Oasis Tokyo Night Moon theme
+
+The repo ships a custom colorscheme for tmux-oasis based on the [Tokyo Night Moon](https://github.com/folke/tokyonight.nvim) palette. The theme file lives at:
+
+```
+~/.tmux/plugins/tmux-oasis/themes/dark/oasis_tokyonight_moon_dark.conf
+```
+
+It is **not bundled with the upstream tmux-oasis plugin** — after installing plugins via TPM you need to copy or symlink it into the plugin's themes directory:
+
+```bash
+# copy
+cp ~/.config/tmux/themes/oasis_tokyonight_moon_dark.conf \
+   ~/.tmux/plugins/tmux-oasis/themes/dark/
+
+# or symlink (survives theme file edits without re-copying)
+ln -s ~/.config/tmux/themes/oasis_tokyonight_moon_dark.conf \
+      ~/.tmux/plugins/tmux-oasis/themes/dark/oasis_tokyonight_moon_dark.conf
+```
+
+The theme is selected in `~/.config/tmux/tmux.conf` via:
+
+```tmux
+set -g @oasis_flavor 'tokyonight_moon_dark'
+```
+
+> **Note:** tmux-oasis only auto-appends `_dark` for its built-in theme names. `tokyonight_moon` is a custom theme, so the full suffix `_dark` must be included explicitly.
 
 ## Security
 
