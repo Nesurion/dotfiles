@@ -32,7 +32,7 @@ build_list() {
   for d in $dirs; do
     local name=${d:t}
     [[ -n ${active_shown[$name]} ]] && continue
-    printf "%s\n" "${d/#$HOME/\~}"
+    printf "%s\n" "${d/#$HOME/~}"
   done
 }
 
@@ -97,5 +97,5 @@ if [[ $clean != */* ]]; then
 fi
 
 # Directory path
-clean=${clean/#\~/$HOME}
+clean="${HOME}${clean#\~}"
 do_switch "${clean:t}" "$clean"
