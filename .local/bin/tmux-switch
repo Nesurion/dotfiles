@@ -54,7 +54,7 @@ if [[ $1 == --last ]]; then
   [[ -z $last || $last == $current ]] && exit 0
   if tmux list-sessions -F '#{session_name}' 2>/dev/null | grep -qx "$last"; then
     echo "$current" > "$LAST_SESSION_FILE"
-    tmux switch-client -t "$last"
+    tmux switch-client -t "$last:"
   fi
   exit 0
 fi
@@ -70,7 +70,7 @@ selected=$(build_list | fzf \
   --bind="ctrl-d:execute-silent(
     raw=\$(echo {} | sed 's/\x1b\[[0-9;]*m//g');
     name=\${raw##*/};
-    tmux kill-session -t \"\$name\" 2>/dev/null
+    tmux kill-session -t \"\${name}:\" 2>/dev/null
   )+reload($0 --list)")
 
 do_switch() {
@@ -79,14 +79,14 @@ do_switch() {
   [[ -n $current ]] && echo "$current" > "$LAST_SESSION_FILE"
 
   if tmux list-sessions -F '#{session_name}' 2>/dev/null | grep -qx "$name"; then
-    tmux switch-client -t "$name"
+    tmux switch-client -t "$name:"
   else
     if [[ -n $cwd ]]; then
       tmux new-session -ds "$name" -c "$cwd"
     else
       tmux new-session -ds "$name"
     fi
-    tmux switch-client -t "$name"
+    tmux switch-client -t "$name:"
   fi
 }
 
