@@ -6,7 +6,11 @@
 #   TMUX_SESSIONIZER_SPECIFIC_PATHS — space-separated individual dirs to include
 
 SEARCH_PATHS=(${=TMUX_SESSIONIZER_SEARCH_PATHS:-"$HOME/dev"})
-SPECIFIC_PATHS=(${=TMUX_SESSIONIZER_SPECIFIC_PATHS:-"$HOME/obsidian $HOME/iris-docs $HOME/.config"})
+if [[ -n $TMUX_SESSIONIZER_SPECIFIC_PATHS ]]; then
+  SPECIFIC_PATHS=(${=TMUX_SESSIONIZER_SPECIFIC_PATHS})
+else
+  SPECIFIC_PATHS=("$HOME/obsidian" "$HOME/iris-docs" "$HOME/.config" "$HOME/secondbrain")
+fi
 
 dirs=()
 for p in $SEARCH_PATHS; do
