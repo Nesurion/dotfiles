@@ -1,8 +1,14 @@
 # oh-my-zsh
-# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(zoxide history-substring-search docker kubectl azure fzf)
+# Skip compaudit (slow dir security scan); use a fixed dumpfile path
+export ZSH_DISABLE_COMPFIX=true
+export ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
+
+# Add brew completions to fpath before oh-my-zsh runs compinit
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
+plugins=(history-substring-search docker kubectl azure)
 
 if [[ $- == *i* ]]; then
   source $ZSH/oh-my-zsh.sh
@@ -71,15 +77,6 @@ source ~/.zshaliases
 # This file is not tracked in git
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-# homebrew installed apps completion (cached — rebuilds once per day)
-fpath+=/opt/homebrew/share/zsh/site-functions
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump*(#qN.mh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
-
 # sdkman (lazy-loaded)
 if [[ -d /opt/homebrew/opt/sdkman-cli/libexec ]]; then
   sdk() {
@@ -93,13 +90,8 @@ fi
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-. "$HOME/.local/bin/env"
-
 # Auto-start tmux only in Ghostty
 if [[ "$TERM_PROGRAM" == "ghostty" ]] && [[ -z "$TMUX" ]]; then
   exec tmux new-session -A -s main
 fi
 
-# homebrew installed apps completion
-fpath+=/opt/homebrew/share/zsh/site-functions
-autoload -Uz compinit && compinit
